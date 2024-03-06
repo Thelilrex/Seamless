@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Seamless</string>
+    <string name="function1"> function 1 </string>
+    <string name="function2"> function 2 </string>
+    <string name="function3"> function 3 </string>
+    <string name="function4"> function 4 </string>
+    <string name="function5"> function 5 </string>
+    <string name="function6"> function 6 </string>
+    <string name="function7"> function 7 </string>
+    <string name="function8"> function 8 </string>
+    <string name="function9"> function 9 </string>
+    <string name="function10"> function 10 </string>
 </resources>
