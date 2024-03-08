@@ -1,15 +1,40 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+# Built application files
+*.apk
+*.ap_
+
+# Files for the Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (sdk path, etc.)
 local.properties
+
+# ProGuard files
+proguard/
+
+# Log files
+*.log
+
+# Android Studio files
+.idea/
+*.iml
+.gradle/
+/captures/
+
+# External native build folders
+.cmake/
+CMakeLists.txt
+CMakeCache.txt
+cmake_install.cmake
+gradle
+.local
