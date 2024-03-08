@@ -191,6 +191,19 @@ fun SettingsJumper()
     // go to SettingFunctionCard
 }
 
+
+
+@Composable
+//@Preview
+fun FunctionCardPreview()
+{
+    DrawMainUI()
+}
+
+//UI
+
+//Personal UI
+
 @Composable
 fun PersonalFunctionList(functionList: List<Function>, modifier:Modifier = Modifier)
 {
@@ -209,17 +222,6 @@ fun PersonalFunctionList(functionList: List<Function>, modifier:Modifier = Modif
         }
     }
 }
-
-@Composable
-//@Preview
-fun FunctionCardPreview()
-{
-    DrawMainUI()
-}
-
-//UI
-
-//Personal UI
 
 @Composable
 fun PersonalFunctionCard(function: Function, modifier: Modifier = Modifier)
