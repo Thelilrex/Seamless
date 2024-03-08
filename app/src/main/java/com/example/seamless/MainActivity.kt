@@ -105,7 +105,6 @@ fun DrawMainUI()
 @Composable
 fun FunctionCard(function: Function, modifier: Modifier = Modifier)
 {
-    //Space()
     Card(
         modifier = modifier.padding(10.dp,30.dp)
     )

@@ -51,7 +51,6 @@ fun PersonalFunctionList(functionList: List<Function>, modifier: Modifier = Modi
 @Composable
 fun PersonalFunctionCard(function: Function, modifier: Modifier = Modifier)
 {
-    //Space()
     Card(
         modifier = modifier.padding(10.dp,30.dp)
     )
@@ -69,8 +68,8 @@ fun PersonalFunctionCard(function: Function, modifier: Modifier = Modifier)
             Button(
                 modifier = Modifier.fillMaxSize(),
                 onClick = {
-                    // go to personal/business functions
-                    DecideFunction()
+                    // go to incomeUI / spendingUI /Personal3UI
+                    PersonalDecideFunction()
                 }) {
                 Text(
                     text = stringResource(id = function.functionResourceId),
@@ -83,6 +82,52 @@ fun PersonalFunctionCard(function: Function, modifier: Modifier = Modifier)
         }
     }
 }
+
+@Composable
+fun PersonalDecideFunction(// get functionResourceId
+)
+{
+    if(
+        true
+    // functionResourceId == Income function
+    )
+    {
+        // jump to IncomeFunctionCard
+    }
+    if(
+        true
+    // functionResourceId == Spending function
+    )
+    {
+        // jump to SpendingFunctionCard
+    }
+    if(
+        true
+    // functionResourceId == Personal3 function
+    )
+    {
+        // jump to Personal3FunctionCard
+    }
+    else
+    {
+        // Error
+    }
+}
+fun IncomeFunctionJumper(function: Function, modifier: Modifier = Modifier)
+{
+    // go to IncomeFunctionCard
+}
+
+fun SpendingFunctionCardJumper(function: Function, modifier: Modifier = Modifier)
+{
+    // go to SpendingFunctionCard
+}
+
+fun Personal3FunctionCardJumper(function: Function, modifier: Modifier = Modifier)
+{
+    // go to Personal3FunctionCard
+}
+
 
 @Composable
 fun DrawPersonalUI()
