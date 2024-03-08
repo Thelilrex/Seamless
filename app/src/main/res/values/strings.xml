@@ -2,6 +2,7 @@
     <string name="app_name">Seamless</string>
     //Error
     <string name="function0"> ERROR! </string>
+
     //MainUI
     <string name="function1"> Personal </string>
     <string name="function2"> Business </string>
