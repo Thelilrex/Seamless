@@ -5,3 +5,4 @@ enum class SeamlessScreen {
     Personal,
     Business
 }
+
