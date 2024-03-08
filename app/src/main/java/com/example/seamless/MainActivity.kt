@@ -192,13 +192,18 @@ fun SettingsJumper()
 }
 
 @Composable
-@Preview
+//@Preview
 fun FunctionCardPreview()
 {
     MainPart()
 }
 
 //UI
+
+//Personal UI
+
+
+//Personal UI
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
@@ -214,4 +219,4 @@ fun GreetingPreview() {
         Greeting("Android")
     }
 }
-// test for branch
+
