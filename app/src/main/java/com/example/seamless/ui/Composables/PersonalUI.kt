@@ -88,7 +88,7 @@ fun PersonalFunctionCard(function: Function, modifier: Modifier = Modifier)
 fun DrawPersonalUI()
 {
     FunctionList(
-        functionList = DataSource().loadFunction()
+        functionList = DataSource().loadFunction(1)
     )
 }
 
