@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Seamless</string>
-
+    //Error
+    <string name="function0"> ERROR! </string>
     //MainUI
     <string name="function1"> function 1 </string>
     <string name="function2"> function 2 </string>
