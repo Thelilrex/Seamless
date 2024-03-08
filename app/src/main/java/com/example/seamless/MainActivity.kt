@@ -46,30 +46,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    DrawPersonalUI()
+
                 }
             }
         }
     }
 }
 //UI
-//@Composable
-//fun LogInPart() {
-//    Row{
-//        Button(onClick = {
-//            // enter the settings
-//        })
-//        {
-//            Text("Log in")
-//        }
-//        Button(onClick = {
-//            // enter the settings
-//        })
-//        {
-//            Text("Sign up")
-//        }
-//    }
-//}
 @Composable
 fun SettingPart()
 {
@@ -201,21 +184,4 @@ fun FunctionCardPreview()
 }
 
 //UI
-
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SeamlessTheme {
-        Greeting("Android")
-    }
-}
 
