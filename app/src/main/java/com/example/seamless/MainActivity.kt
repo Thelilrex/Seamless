@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainPart()
+                    DrawMainUI()
                 }
             }
         }
@@ -110,7 +110,7 @@ fun FunctionList(functionList: List<Function>, modifier:Modifier = Modifier)
 }
 
 @Composable
-fun MainPart()
+fun DrawMainUI()
 {
     SettingPart()
     FunctionList(
@@ -192,16 +192,85 @@ fun SettingsJumper()
 }
 
 @Composable
+fun PersonalFunctionList(functionList: List<Function>, modifier:Modifier = Modifier)
+{
+    LazyColumn (
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    )
+    {
+        items(functionList){
+                function: Function -> FunctionCard(function = function,
+            modifier = Modifier.padding(20.dp),
+
+            )
+
+        }
+    }
+}
+
+@Composable
 //@Preview
 fun FunctionCardPreview()
 {
-    MainPart()
+    DrawMainUI()
 }
 
 //UI
 
 //Personal UI
 
+@Composable
+fun PersonalFunctionCard(function: Function, modifier: Modifier = Modifier)
+{
+    //Space()
+    Card(
+        modifier = modifier.padding(10.dp,30.dp)
+    )
+    {
+
+        Column (modifier = modifier)
+        {
+            Image(
+                painter = painterResource(id = function.imageResourceId),
+                contentDescription = stringResource(id = function.functionResourceId),
+                modifier = Modifier
+                    .fillMaxWidth().height(130.dp),
+                contentScale = ContentScale.Crop
+            )
+            Button(
+                modifier = Modifier.fillMaxSize(),
+                onClick = {
+                    // go to personal/business functions
+                    DecideFunction()
+                }) {
+                Text(
+                    text = stringResource(id = function.functionResourceId),
+                    modifier = Modifier
+                        .height(40.dp),
+                    style = MaterialTheme.typography.headlineSmall
+                )
+            }
+
+        }
+    }
+}
+
+@Composable
+fun DrawPersonalUI()
+{
+    FunctionList(
+        functionList = DataSource().loadFunction()
+    )
+}
+
+@Composable
+@Preview
+fun PersonalFunctionCardPreview()
+{
+    DrawPersonalUI()
+}
 
 //Personal UI
 @Composable
