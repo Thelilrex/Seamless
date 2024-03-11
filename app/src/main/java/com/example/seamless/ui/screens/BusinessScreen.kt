@@ -9,7 +9,8 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun BusinessScreen(
-    modifier: Modifier
+    modifier: Modifier,
+    onHomeButtonClicked: () -> Unit = {}
 ) {
     Column(
         modifier = modifier
@@ -21,7 +22,7 @@ fun BusinessScreen(
             Text(text = "Do Something")
         }
         Button(
-            onClick = {},
+            onClick = onHomeButtonClicked,
             modifier = modifier
         ){
             Text(text = "Home")

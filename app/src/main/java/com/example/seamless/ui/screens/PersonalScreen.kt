@@ -9,7 +9,8 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun PersonalScreen(
-    modifier: Modifier
+    modifier: Modifier,
+    onHomeButtonClicked: () -> Unit = {}
 ) {
     Column(
         modifier = modifier
@@ -21,7 +22,7 @@ fun PersonalScreen(
             Text(text = "Do Something")
         }
         Button(
-            onClick = {},
+            onClick = onHomeButtonClicked,
             modifier = modifier
         ){
             Text(text = "Home")
