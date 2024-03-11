@@ -9,7 +9,9 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun StartScreen(
-    modifier: Modifier
+    modifier: Modifier,
+    onPersonalButtonClicked: (Int) -> Unit = {},
+    onBusinessButtonClicked: (Int) -> Unit = {}
 ) {
     Column(
         modifier = modifier
@@ -32,5 +34,7 @@ fun StartScreen(
 @Preview
 @Composable
 fun StartScreenPreview() {
-    StartScreen(modifier = Modifier)
+    StartScreen(
+        modifier = Modifier
+    )
 }
