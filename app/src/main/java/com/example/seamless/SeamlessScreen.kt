@@ -43,3 +43,9 @@ fun SeamlessApp(
         }
     }
 }
+
+private fun onHomeButtonClicked(
+    navController: NavHostController
+) {
+    navController.popBackStack(SeamlessScreen.Start.name, inclusive = false)
+}
