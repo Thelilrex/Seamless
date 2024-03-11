@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainPart()
+                    SeamlessApp()
                 }
             }
         }
@@ -195,5 +195,5 @@ fun SettingsJumper()
 @Preview
 fun FunctionCardPreview()
 {
-    MainPart()
+    SeamlessApp()
 }
