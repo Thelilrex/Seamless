@@ -10,20 +10,20 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun StartScreen(
     modifier: Modifier,
-    onPersonalButtonClicked: (Int) -> Unit = {},
-    onBusinessButtonClicked: (Int) -> Unit = {}
+    onPersonalButtonClicked: () -> Unit = {},
+    onBusinessButtonClicked: () -> Unit = {}
 ) {
     Column(
         modifier = modifier
     ) {
         Button(
-            onClick = {},
+            onClick = onPersonalButtonClicked,
             modifier = modifier
         ){
             Text(text = "Personal")
         }
         Button(
-            onClick = {},
+            onClick = onBusinessButtonClicked,
             modifier = modifier
         ){
             Text(text = "Business")
