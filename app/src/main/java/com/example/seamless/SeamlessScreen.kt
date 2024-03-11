@@ -1,7 +1,6 @@
 package com.example.seamless
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -35,7 +34,10 @@ fun SeamlessApp(
         }
 
         composable(route = SeamlessScreen.Personal.name) {
-            PersonalScreen(modifier = Modifier)
+            PersonalScreen(
+                modifier = Modifier,
+                onHomeButtonClicked = { goHome(navController = navController) }
+            )
         }
 
         composable(route = SeamlessScreen.Business.name) {
@@ -44,7 +46,7 @@ fun SeamlessApp(
     }
 }
 
-private fun onHomeButtonClicked(
+private fun goHome(
     navController: NavHostController
 ) {
     navController.popBackStack(SeamlessScreen.Start.name, inclusive = false)
