@@ -41,7 +41,10 @@ fun SeamlessApp(
         }
 
         composable(route = SeamlessScreen.Business.name) {
-            BusinessScreen(modifier = Modifier)
+            BusinessScreen(
+                modifier = Modifier,
+                onHomeButtonClicked = { goHome(navController = navController) }
+            )
         }
     }
 }

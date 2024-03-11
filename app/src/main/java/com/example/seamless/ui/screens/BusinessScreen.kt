@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun BusinessScreen(
     modifier: Modifier,
-    onHomeButtonClicked: () -> Unit = {}
+    onHomeButtonClicked: () -> Unit
 ) {
     Column(
         modifier = modifier
@@ -33,5 +33,8 @@ fun BusinessScreen(
 @Preview
 @Composable
 fun BusinessScreenPreview() {
-    BusinessScreen(modifier = Modifier)
+    BusinessScreen(
+        modifier = Modifier,
+        onHomeButtonClicked = {}
+    )
 }
