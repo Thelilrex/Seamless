@@ -71,7 +71,6 @@ fun SettingPart()
         {
             Text("Setting")
         }
-
     }
 }
 @Composable
@@ -123,7 +122,7 @@ fun FunctionCard(function: Function, modifier: Modifier = Modifier)
                 modifier = Modifier.fillMaxSize(),
                 onClick = {
                     // go to personal/business functions
-                    DecideFunction()
+                    decideFunction()
                 }) {
                 Text(
                     text = stringResource(id = function.functionResourceId),
@@ -137,7 +136,7 @@ fun FunctionCard(function: Function, modifier: Modifier = Modifier)
     }
 }
 
-fun DecideFunction (// get functionResourceId
+fun decideFunction (// get functionResourceId
 )
 {
     if(
