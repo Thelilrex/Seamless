@@ -40,6 +40,8 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.XAxis.XAxisPosition
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import data.DataSource
 import model.Function
@@ -47,6 +49,7 @@ import model.Function
 import java.util.Arrays
 
 //Personal UI
+
 
 class MyChartActivity : AppCompatActivity() {
     private lateinit var lineChart: LineChart
@@ -98,7 +101,16 @@ class MyChartActivity : AppCompatActivity() {
         entries2.add(Entry(1f, 15f))
         entries2.add(Entry(2f, 25f))
 
-        
+        var dataSet1 = LineDataSet(entries1, "Month1")
+        dataSet1.color = Color.BLUE
+
+        var dataSet2 = LineDataSet(entries1, "Month2")
+        dataSet2.color = Color.GREEN
+
+        var lineData = LineData(dataSet1, dataSet2)
+
+        lineChart.setData(lineData)
+        lineChart.invalidate()
     }
 }
 
@@ -244,7 +256,8 @@ fun DrawPersonalUI()
 @Preview
 fun PersonalFunctionCardPreview()
 {
-    DrawPersonalUI()
+    //DrawPersonalUI()
+    MyChartActivity()
 }
 
 //Personal UI
