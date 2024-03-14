@@ -1,5 +1,9 @@
 package com.example.seamless.ui.Composables
 
+import android.media.audiofx.AudioEffect.Descriptor
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,10 +30,54 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.seamless.FunctionCard
 import com.example.seamless.FunctionList
+import com.example.seamless.R
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.Description
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.XAxis.XAxisPosition
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import data.DataSource
 import model.Function
+import java.util.Arrays
 
 //Personal UI
+
+class MyChartActivity : AppCompatActivity() {
+    private lateinit var lineChart: LineChart
+    private lateinit var xValues: MutableList<String>
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.layout)
+
+        lineChart = findViewById(R.id.chart)
+
+        var description: Description = Description()
+        description.setText("Income")
+        description.setPosition(150f, 15f)
+        lineChart.setDescription(description)
+        lineChart.getAxisRight().setDrawLabels(false)
+
+        val xValues = listOf("Income1", "Income2", "Income3")
+
+        val xAxis: XAxis = lineChart.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.setLabelCount(3)
+        xAxis.setGranularity(1f)
+        
+
+        xAxis.valueFormatter = IndexAxisValueFormatter(xValues) // This is for the list of x values,
+        //If you want to get the list from input, use this below
+        /*
+        private lateinit var xValues: List<String>
+        fun setupChart() {
+            val xAxis: XAxis = lineChart.xAxis
+            xAxis.valueFormatter = IndexAxisValueFormatter(xValues)
+        }
+         */
+
+    }
+}
+
 
 @Composable
 fun PersonalFunctionList(functionList: List<Function>, modifier: Modifier = Modifier)
@@ -112,6 +160,7 @@ fun PersonalFunctionCard(function: Function, modifier: Modifier = Modifier)
         }
     }
 }
+
 
 
 fun personalDecideFunction(// get functionResourceId
