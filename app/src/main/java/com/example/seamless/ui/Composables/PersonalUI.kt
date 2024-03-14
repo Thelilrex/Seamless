@@ -23,6 +23,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import android.graphics.Color
+//import androidx.compose.ui.graphics.Color // This color is not for the charts, If you want to include this color whatever, use
+//android.graphics.Color.BLACK for your Color.BLACK instead
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -35,9 +38,12 @@ import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.XAxis.XAxisPosition
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import data.DataSource
 import model.Function
+
 import java.util.Arrays
 
 //Personal UI
@@ -63,7 +69,14 @@ class MyChartActivity : AppCompatActivity() {
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.setLabelCount(3)
         xAxis.setGranularity(1f)
-        
+
+        val yAxis: YAxis = lineChart.axisLeft
+        yAxis.setAxisMinimum(0f)
+        yAxis.setAxisMaximum(100f)
+        yAxis.setAxisLineWidth(2f)
+        yAxis.setAxisLineColor(Color.BLACK)
+        yAxis.setLabelCount(10)
+
 
         xAxis.valueFormatter = IndexAxisValueFormatter(xValues) // This is for the list of x values,
         //If you want to get the list from input, use this below
@@ -75,6 +88,17 @@ class MyChartActivity : AppCompatActivity() {
         }
          */
 
+        val entries1 = ArrayList<Entry>()
+        entries1.add(Entry(0f, 10f))
+        entries1.add(Entry(1f, 10f))
+        entries1.add(Entry(2f, 10f))
+
+        val entries2 = ArrayList<Entry>()
+        entries2.add(Entry(0f, 5f))
+        entries2.add(Entry(1f, 15f))
+        entries2.add(Entry(2f, 25f))
+
+        
     }
 }
 
