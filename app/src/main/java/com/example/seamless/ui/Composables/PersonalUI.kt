@@ -1,5 +1,6 @@
 package com.example.seamless.ui.Composables
 
+import android.content.Context
 import android.media.audiofx.AudioEffect.Descriptor
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -23,8 +24,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import android.widget.LinearLayout
 import android.graphics.Color
-//import androidx.compose.ui.graphics.Color // This color is not for the charts, If you want to include this color whatever, use
+import androidx.compose.ui.graphics.Color as ComposeColor
+//This color is not for the charts, If you want to include this color whatever, use
 //android.graphics.Color.BLACK for your Color.BLACK instead
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -50,70 +53,139 @@ import java.util.Arrays
 
 //Personal UI
 
-
-class MyChartActivity : AppCompatActivity() {
-    private lateinit var lineChart: LineChart
-    private lateinit var xValues: MutableList<String>
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout)
-
-        lineChart = findViewById(R.id.chart)
-
-        var description: Description = Description()
-        description.setText("Income")
-        description.setPosition(150f, 15f)
-        lineChart.setDescription(description)
-        lineChart.getAxisRight().setDrawLabels(false)
-
-        val xValues = listOf("Income1", "Income2", "Income3")
-
-        val xAxis: XAxis = lineChart.xAxis
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-        xAxis.setLabelCount(3)
-        xAxis.setGranularity(1f)
-
-        val yAxis: YAxis = lineChart.axisLeft
-        yAxis.setAxisMinimum(0f)
-        yAxis.setAxisMaximum(100f)
-        yAxis.setAxisLineWidth(2f)
-        yAxis.setAxisLineColor(Color.BLACK)
-        yAxis.setLabelCount(10)
-
-
-        xAxis.valueFormatter = IndexAxisValueFormatter(xValues) // This is for the list of x values,
-        //If you want to get the list from input, use this below
-        /*
-        private lateinit var xValues: List<String>
-        fun setupChart() {
-            val xAxis: XAxis = lineChart.xAxis
-            xAxis.valueFormatter = IndexAxisValueFormatter(xValues)
-        }
-         */
-
-        val entries1 = ArrayList<Entry>()
-        entries1.add(Entry(0f, 10f))
-        entries1.add(Entry(1f, 10f))
-        entries1.add(Entry(2f, 10f))
-
-        val entries2 = ArrayList<Entry>()
-        entries2.add(Entry(0f, 5f))
-        entries2.add(Entry(1f, 15f))
-        entries2.add(Entry(2f, 25f))
-
-        var dataSet1 = LineDataSet(entries1, "Month1")
-        dataSet1.color = Color.BLUE
-
-        var dataSet2 = LineDataSet(entries1, "Month2")
-        dataSet2.color = Color.GREEN
-
-        var lineData = LineData(dataSet1, dataSet2)
-
-        lineChart.setData(lineData)
-        lineChart.invalidate()
+fun configureLineChart(lineChart: LineChart) {
+    val description = Description().apply {
+        text = "Income"
+        setPosition(150f, 15f)
     }
+    lineChart.description = description
+    lineChart.axisRight.isEnabled = false
+
+    val xValues = listOf("Jan", "Feb", "Mar","Apr","May", "Jun", "Jul",
+        "Aug", "Sep", "Oct", "Nov", "Dec")
+    lineChart.xAxis.apply {
+        position = XAxis.XAxisPosition.BOTTOM
+        setLabelCount(3)
+        granularity = 1f
+        valueFormatter = IndexAxisValueFormatter(xValues)
+    }
+
+    lineChart.axisLeft.apply {
+        axisMinimum = 0f
+        axisMaximum = 100f
+        axisLineWidth = 2f
+        axisLineColor = Color.BLACK
+        setLabelCount(10, true)
+    }
+
+    val entries1 = listOf(
+        Entry(0f, 60f),
+        Entry(1f, 57f),
+        Entry(2f, 63f),
+        Entry(3f, 60f),
+        Entry(4f, 57f),
+        Entry(5f, 63f),
+        Entry(6f, 60f),
+        Entry(7f, 57f),
+        Entry(8f, 63f),
+        Entry(9f, 60f),
+        Entry(10f, 57f),
+        Entry(11f, 63f),
+        Entry(12f, 60f)
+    )
+
+    val entries2 = listOf(
+        Entry(0f, 5.4f),
+        Entry(1f, 6.2f),
+        Entry(2f, 7.2f),
+        Entry(3f, 6.3f),
+        Entry(4f, 5.7f),
+        Entry(5f, 6.3f),
+        Entry(6f, 6.0f),
+        Entry(7f, 5.7f),
+        Entry(8f, 6.3f),
+        Entry(9f, 6.0f),
+        Entry(10f, 5.7f),
+        Entry(11f, 6.3f),
+        Entry(12f, 6.0f)
+    )
+
+    val entries3 = listOf(
+        Entry(0f, 20f),
+        Entry(1f, 37f),
+        Entry(2f, 53f),
+        Entry(3f, 10f),
+        Entry(4f, 27f),
+        Entry(5f, 43f),
+        Entry(6f, 20f),
+        Entry(7f, 47f),
+        Entry(8f, 23f),
+        Entry(9f, 50f),
+        Entry(10f, 57f),
+        Entry(11f, 33f),
+        Entry(12f, 80f)
+    )
+
+    val dataSet1 = LineDataSet(entries1, "Food").apply {
+        color = Color.BLUE
+    }
+
+    val dataSet2 = LineDataSet(entries2, "Transportation").apply {
+        color = Color.GREEN
+    }
+
+    val dataSet3 = LineDataSet(entries3, "Entertainment").apply {
+        color = Color.RED
+    }
+
+    val lineData = LineData(dataSet1, dataSet2, dataSet3)
+    lineChart.data = lineData
+    lineChart.invalidate()
 }
 
+
+class MyChartActivity : AppCompatActivity() {
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.layout)
+
+    val chartContainer = findViewById<LinearLayout>(R.id.chart)
+    val lineChart = ChartUtils.createLineChart(this)
+    chartContainer.addView(lineChart)
+}
+
+    class ChartUtils {
+        companion object {
+            fun createLineChart(context: Context): LineChart {
+                val lineChart = LineChart(context)
+
+                lineChart.axisRight.isEnabled = false
+                val xAxis = lineChart.xAxis
+                xAxis.position = XAxis.XAxisPosition.BOTTOM
+                xAxis.setDrawGridLines(false)
+
+                val yAxisLeft = lineChart.axisLeft
+                yAxisLeft.setDrawGridLines(true)
+
+
+                val entries = ArrayList<Entry>()
+                entries.add(Entry(1f, 2f))
+                entries.add(Entry(2f, 3f))
+                entries.add(Entry(3f, 5f))
+                val dataSet = LineDataSet(entries, "Sample")
+                dataSet.color = Color.BLUE
+                dataSet.valueTextColor = Color.BLACK
+                dataSet.valueTextSize = 12f
+
+                val lineData = LineData(dataSet)
+                lineChart.data = lineData
+
+                return lineChart
+            }
+        }
+    }
+
+}
 
 @Composable
 fun PersonalFunctionList(functionList: List<Function>, modifier: Modifier = Modifier)

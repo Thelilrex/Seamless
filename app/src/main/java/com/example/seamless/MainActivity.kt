@@ -28,7 +28,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import android.graphics.Color
+import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -36,10 +37,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.seamless.ui.Composables.DrawPersonalUI
+import com.example.seamless.ui.Composables.MyChartActivity.ChartUtils.Companion.createLineChart
+import com.example.seamless.ui.Composables.configureLineChart
+//import com.example.seamless.ui.Composables.createLineChart
 import com.example.seamless.ui.theme.SeamlessTheme
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import data.DataSource
 import model.Function
+//import com.example.seamless.ui.Composables.configureLineChart
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,19 +59,17 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //DrawPersonalUI()
-                    AndroidView(factory = { context ->
-                        LineChart(context).apply {
+                    DrawPersonalUI()
 
-                            layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-                            
-                        }
-                    })
                 }
             }
         }
     }
 }
+
+
+
+
 //UI
 @Composable
 fun SettingPart()
