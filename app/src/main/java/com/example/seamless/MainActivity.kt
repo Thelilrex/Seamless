@@ -46,7 +46,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SeamlessApp()
+                    //SeamlessApp()
+                    setContentView(R.layout.activity_main)
                 }
             }
         }
