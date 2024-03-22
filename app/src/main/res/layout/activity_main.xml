@@ -25,8 +25,8 @@
     <ImageButton
         android:id="@+id/Income"
         android:layout_width="413dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="120dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="372dp"
         android:contentDescription="Income"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,8 +38,8 @@
     <ImageButton
         android:id="@+id/Goals"
         android:layout_width="413dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="588dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="732dp"
         android:contentDescription="Goals"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,8 +49,8 @@
     <ImageButton
         android:id="@+id/Spend"
         android:layout_width="413dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="364dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="552dp"
         android:contentDescription="Spend"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,13 +60,61 @@
     <TextView
         android:id="@+id/textIncome"
         android:layout_width="413dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="512dp"
+        android:gravity="center"
         android:text="Income"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textSpend"
+        android:layout_width="413dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="692dp"
+        android:gravity="center"
+        android:text="Spend"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textGoals"
+        android:layout_width="413dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="872dp"
+        android:gravity="center"
+        android:text="Goals"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:layout_width="413dp"
+        android:layout_height="280dp"
+        android:layout_marginTop="92dp"
+        app:layout_constraintBottom_toTopOf="@+id/Income"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="30sp"
-        android:gravity="center"
-        />
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/Image1"
+                android:layout_width="413dp"
+                android:layout_height="292dp"
+                android:layout_marginTop="0dp"
+                android:contentDescription="Image1"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/testimage" />
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
