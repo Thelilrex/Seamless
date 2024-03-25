@@ -132,7 +132,6 @@ fun FunctionCard(function: Function, modifier: Modifier = Modifier)
                     style = MaterialTheme.typography.headlineSmall
                 )
             }
-
         }
     }
 }
