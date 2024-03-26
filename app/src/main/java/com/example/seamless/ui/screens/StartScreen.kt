@@ -77,7 +77,7 @@ fun PersonalButton(onImageClick: () -> Unit, modifier: Modifier = Modifier) {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.testimage),
+                    painter = painterResource(id = R.drawable.personalbutton),
                     contentDescription = "Clickable settings",
                     modifier = Modifier
                         .fillMaxWidth()
@@ -111,7 +111,7 @@ fun BusinessButton(onImageClick: () -> Unit, modifier: Modifier = Modifier) {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.testimage),
+                    painter = painterResource(id = R.drawable.businessbutton),
                     contentDescription = "Clickable settings",
                     modifier = Modifier
                         .fillMaxWidth()

@@ -36,13 +36,13 @@ fun PersonalIncomeScreen() {
 
     LazyColumn {
         item{
-            PieChart(data = pieChartData, colors = pieChartColors, modifier = Modifier.fillMaxSize())
+            PersonalIncomePieChart(data = pieChartData, colors = pieChartColors, modifier = Modifier.fillMaxSize())
         }
     }
 }
 
 @Composable
-fun PieChart(data: List<Float>, colors: List<Color>, modifier: Modifier = Modifier) {
+fun PersonalIncomePieChart(data: List<Float>, colors: List<Color>, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .padding(16.dp)
