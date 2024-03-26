@@ -37,42 +37,6 @@ fun StartScreen(
     ) {
         SettingButton(onSettingsButtonClicked)
         ButtonsLayout(onPersonalButtonClicked, onBusinessButtonClicked)
-//        Card(
-//            modifier = Modifier
-//        )
-//        {
-//            Column (modifier = modifier)
-//            {
-//                Image(painter = painterResource(id = R.drawable.testimage), contentDescription = "Image for test")
-//                Button(
-//                    modifier = Modifier,
-//                    onClick = onPersonalButtonClicked)
-//                {
-//                    Text(
-//                        text = "Personal",
-//                        modifier = Modifier.size(100.dp, 40.dp),
-//                        style = MaterialTheme.typography.headlineSmall
-//                    )
-//                }
-//            }
-//        }
-//        Card(
-//            modifier = Modifier
-//        )
-//        {
-//            Column (modifier = modifier)
-//            {
-//                Button(
-//                    modifier = Modifier,
-//                    onClick = onBusinessButtonClicked) {
-//                    Text(
-//                        text = "Business",
-//                        modifier = Modifier.size(100.dp, 40.dp),
-//                        style = MaterialTheme.typography.headlineSmall
-//                    )
-//                }
-//            }
-//        }
     }
 }
 
@@ -118,7 +82,8 @@ fun PersonalButton(onImageClick: () -> Unit, modifier: Modifier = Modifier) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
-                        .clickable(onClick = onImageClick)
+                        .clickable(onClick = onImageClick),
+                    contentScale = ContentScale.FillBounds
                 )
                 Text(
                     text = "Personal",
@@ -137,7 +102,7 @@ fun PersonalButton(onImageClick: () -> Unit, modifier: Modifier = Modifier) {
 @Composable
 fun BusinessButton(onImageClick: () -> Unit, modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.fillMaxWidth() 
+        modifier = modifier.fillMaxWidth()
     ) {
         Card(
             modifier = Modifier.fillMaxWidth()
@@ -151,7 +116,8 @@ fun BusinessButton(onImageClick: () -> Unit, modifier: Modifier = Modifier) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
-                        .clickable(onClick = onImageClick)
+                        .clickable(onClick = onImageClick),
+                    contentScale = ContentScale.FillBounds
                 )
                 Text(
                     text = "Business",
