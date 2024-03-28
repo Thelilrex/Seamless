@@ -32,6 +32,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.seamless.ui.screens.PersonalIncomeScreen
+import com.example.seamless.ui.screens.PersonalScreen
+import com.example.seamless.ui.screens.PersonalSpendsScreen
+import com.example.seamless.ui.screens.StartScreen
 import com.example.seamless.ui.theme.SeamlessTheme
 import data.DataSource
 import model.Function
@@ -53,23 +57,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 //UI
-//@Composable
-//fun LogInPart() {
-//    Row{
-//        Button(onClick = {
-//            // enter the settings
-//        })
-//        {
-//            Text("Log in")
-//        }
-//        Button(onClick = {
-//            // enter the settings
-//        })
-//        {
-//            Text("Sign up")
-//        }
-//    }
-//}
+
 @Composable
 fun SettingPart()
 {
@@ -140,7 +128,6 @@ fun FunctionCard(function: Function, modifier: Modifier = Modifier)
                 modifier = Modifier.fillMaxSize(),
                 onClick = {
                     // go to personal/business functions
-                    DecideFunction()
                 }) {
                 Text(
                     text = stringResource(id = function.functionResourceId),
@@ -149,46 +136,8 @@ fun FunctionCard(function: Function, modifier: Modifier = Modifier)
                     style = MaterialTheme.typography.headlineSmall
                 )
             }
-
         }
     }
-}
-
-fun DecideFunction (// get functionResourceId
-)
-{
-    if(
-        true
-        // functionResourceId == Personal function
-    )
-    {
-        // jump to PersonalFunctionCard
-    }
-    if(
-        true
-        // functionResourceId == Business function
-    )
-    {
-        // jump to PersonalFunctionCard
-    }
-    else
-    {
-        // Error
-    }
-}
-fun PersonalFunctionJumper(function: Function, modifier: Modifier = Modifier)
-{
-    // go to PersonalFunctionCard
-}
-
-fun BusinessFunctionCardJumper(function: Function, modifier: Modifier = Modifier)
-{
-    // go to BusinessFunctionCard
-}
-
-fun SettingsJumper()
-{
-    // go to SettingFunctionCard
 }
 
 @Composable
