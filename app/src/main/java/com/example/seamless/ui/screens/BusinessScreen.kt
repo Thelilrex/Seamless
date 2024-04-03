@@ -51,11 +51,11 @@ fun BusinessHomeButton(onImageClick: () -> Unit) {
 @Composable
 fun BusinessButtonsLayout(onPersonalClick: () -> Unit, onBusinessClick: () -> Unit, onSpendsClick: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize()) {
-        IncomeButton(
+        BusinessIncomeButton(
             onImageClick = onPersonalClick,
             modifier = Modifier.weight(1f)
         )
-        SpendsButton(
+        ExpensesButton(
             onImageClick = onBusinessClick,
             modifier = Modifier.weight(1f)
         )
@@ -101,7 +101,7 @@ fun BusinessIncomeButton(onImageClick: () -> Unit, modifier: Modifier = Modifier
 }
 
 @Composable
-fun BusinessOutcomeButton(onImageClick: () -> Unit, modifier: Modifier = Modifier) {
+fun ExpensesButton(onImageClick: () -> Unit, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
@@ -121,7 +121,7 @@ fun BusinessOutcomeButton(onImageClick: () -> Unit, modifier: Modifier = Modifie
                     contentScale = ContentScale.FillBounds
                 )
                 Text(
-                    text = "Spends",
+                    text = "Expenses",
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentWidth(Alignment.CenterHorizontally)
@@ -146,7 +146,7 @@ fun InvestorsButton(onImageClick: () -> Unit, modifier: Modifier = Modifier) {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.testimage),
+                    painter = painterResource(id = R.drawable.investorsbutton),
                     contentDescription = "Clickable settings",
                     modifier = Modifier
                         .fillMaxWidth()
