@@ -26,9 +26,11 @@ fun SeamlessApp(
             StartScreen(
                 onPersonalButtonClicked = {
                     navController.navigate(SeamlessScreen.Personal.name)
+                    currentScreen = "Personal" // When user click Personal button, currentScreen shows "Personal"
                 },
                 onBusinessButtonClicked = {
                     navController.navigate(SeamlessScreen.Business.name)
+                    currentScreen = "Business"
                 },
                 modifier = Modifier)
         }
@@ -36,14 +38,16 @@ fun SeamlessApp(
         composable(route = SeamlessScreen.Personal.name) {
             PersonalScreen(
                 modifier = Modifier,
-                onHomeButtonClicked = { goHome(navController = navController) }
+                onHomeButtonClicked = { goHome(navController = navController)
+                    currentScreen = "Start"}
             )
         }
 
         composable(route = SeamlessScreen.Business.name) {
             BusinessScreen(
                 modifier = Modifier,
-                onHomeButtonClicked = { goHome(navController = navController) }
+                onHomeButtonClicked = { goHome(navController = navController)
+                    currentScreen = "Start"}
             )
         }
     }

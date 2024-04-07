@@ -57,7 +57,11 @@ class MainActivity : ComponentActivity() {
     }
 }
 //UI
-
+var currentScreen: String = "Start"
+fun ScreenChecker()
+{
+    println(currentScreen)
+}
 @Composable
 fun SettingPart()
 {
@@ -121,7 +125,8 @@ fun FunctionCard(function: Function, modifier: Modifier = Modifier)
                 painter = painterResource(id = function.imageResourceId),
                 contentDescription = stringResource(id = function.functionResourceId),
                 modifier = Modifier
-                    .fillMaxWidth().height(130.dp),
+                    .fillMaxWidth()
+                    .height(130.dp),
                 contentScale = ContentScale.Crop
             )
             Button(
