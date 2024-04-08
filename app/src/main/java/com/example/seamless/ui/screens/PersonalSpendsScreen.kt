@@ -70,7 +70,7 @@ fun PersonalSpendsScreen() {
                             .weight(1f)
                             .align(Alignment.CenterVertically)
                     )
-                    Legend(
+                    PersonalSpendLegend(
                         spendTypes = spendTypes,
                         colors = pieChartColors,
                         modifier = Modifier.align(Alignment.CenterVertically)
@@ -179,7 +179,7 @@ fun PersonalSpendsPieChart(data: List<Float>, colors: List<Color>, modifier: Mod
 }
 
 @Composable
-fun Legend(spendTypes: List<String>, colors: List<Color>, modifier: Modifier = Modifier) {
+fun PersonalSpendLegend(spendTypes: List<String>, colors: List<Color>, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         spendTypes.forEachIndexed { index, spendType ->
             Row(verticalAlignment = Alignment.CenterVertically) {
