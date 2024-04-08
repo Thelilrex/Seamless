@@ -57,10 +57,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 //UI
-var currentScreen: String = "Start"
-fun ScreenChecker()
+var currentScreen: Int = 0 // 0 for start, 1 for Personal, 2 for Business
+fun ScreenChecker(): Int
 {
-    println(currentScreen)
+    return currentScreen
 }
 @Composable
 fun SettingPart()
