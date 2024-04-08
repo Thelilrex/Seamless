@@ -1,3 +1,2 @@
 # FinalProject
-// test for synch
-// Hey
+//'Final project for the mobile development class'
