@@ -49,14 +49,8 @@ class MainActivity : ComponentActivity() {
                 ) {
                      val dao = AppDatabase.getDatabase(applicationContext).appDao()
                      LaunchedEffect(dao){
-                         launch {
-                          //dao.insertType(Type(type="asd", description = "asdasdasd"))
-                             dao.deleteTypeById(1)
-                         }
-
-                     }
-
-
+                         //dao.deleteTypeById(1)
+                    }
                 }
             }
         }

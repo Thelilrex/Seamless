@@ -10,11 +10,13 @@ import java.util.Date
 @Entity(foreignKeys = [ForeignKey(
     entity = Type::class,
     childColumns = ["typeID"],
-    parentColumns = ["typeID"]),
+    parentColumns = ["typeID"], onDelete = ForeignKey.CASCADE
+),
     ForeignKey(
         entity = AcquisitionCategory::class,
         childColumns = ["acquisitionCatID"],
-        parentColumns = ["acquisitionCatID"]
+        parentColumns = ["acquisitionCatID"],
+        onDelete = ForeignKey.CASCADE
     )])
 data class Assets(
     @PrimaryKey(autoGenerate = true)

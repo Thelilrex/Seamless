@@ -15,7 +15,8 @@ Example input: - Type ---> from the buttons, category ----> from buttons, date, 
 @Entity(foreignKeys = [ForeignKey(
     entity = Category::class,
     childColumns = ["categoryID"],
-    parentColumns = ["categoryID"])])
+    parentColumns = ["categoryID"],
+    onDelete = ForeignKey.CASCADE)])
 data class Income(
     @PrimaryKey(autoGenerate = true)
     val incomeID: Int = 0,

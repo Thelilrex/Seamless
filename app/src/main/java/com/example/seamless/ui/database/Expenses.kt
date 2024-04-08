@@ -17,7 +17,9 @@ Personal ---> Through buttons, Food  ----> Through buttons, 31 March 2024, 7-Ele
 @Entity(foreignKeys = [ForeignKey(
     entity = Category::class,
     childColumns = ["categoryID"],
-    parentColumns = ["categoryID"])])
+    parentColumns = ["categoryID"],
+    onDelete = ForeignKey.CASCADE
+)])
 data class Expenses(
     @PrimaryKey(autoGenerate = true)
     val expenseID: Int = 0,
