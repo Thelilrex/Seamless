@@ -34,12 +34,12 @@ import com.example.seamless.R
 fun IncomeStatementTracks()
 {
     var revenueItems = listOf(
-        RevenueItem("Revenue1", 114514.0),
-        RevenueItem("Revenue2", 1919810.0)
+        RevenueItem("Revenue1", 114.0),
+        RevenueItem("Revenue2", 810.0)
     )
     var expenseItems = listOf(
-        ExpenseItem("Expense1", 114514.0),
-        ExpenseItem("Expense2", 1919810.0)
+        ExpenseItem("Expense1", 114.0),
+        ExpenseItem("Expense2", 810.0)
     )
     IncomeStatementTracksLayout(revenueItems, expenseItems)
 }
@@ -48,10 +48,15 @@ fun IncomeStatementTracks()
 fun IncomeStatementTracksLayout(revenueItems: List<RevenueItem>, expenseItems: List<ExpenseItem>) {
     Column(modifier = Modifier.fillMaxHeight()) {
         Divider()
-        RevenuesLayout(revenueItems = revenueItems)
+        Column(modifier = Modifier.weight(1f)) {
+            RevenuesLayout(revenueItems = revenueItems)
+            Divider()
+        }
         Divider()
-        ExpensesLayout(expenseItems = expenseItems)
-        Divider()
+        Column(modifier = Modifier.weight(1f)) {
+            ExpensesLayout(expenseItems = expenseItems)
+            Divider()
+        }
     }
 }
 @Composable

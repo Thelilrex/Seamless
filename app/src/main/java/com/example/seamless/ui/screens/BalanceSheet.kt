@@ -33,12 +33,12 @@ import com.example.seamless.R
 fun BalanceSheet()
 {
     var asstesItems = listOf(
-        AssetsItem("Revenue1", 114514.0),
-        AssetsItem("Revenue2", 1919810.0)
+        AssetsItem("Revenue1", 114.0),
+        AssetsItem("Revenue2", 810.0)
     )
     var liabilitiesItems = listOf(
-        LiabilitiesItem("Expense1", 114514.0),
-        LiabilitiesItem("Expense2", 1919810.0)
+        LiabilitiesItem("Expense1", 114.0),
+        LiabilitiesItem("Expense2", 810.0)
     )
     BalanceSheetLayout(asstesItems, liabilitiesItems)
 }
@@ -47,10 +47,15 @@ fun BalanceSheet()
 fun BalanceSheetLayout(asstesItems: List<AssetsItem>, liabilitiesItems: List<LiabilitiesItem>) {
     Column(modifier = Modifier.fillMaxHeight()) {
         Divider()
-        AssetsLayout(asstesItems = asstesItems)
+        Column(modifier = Modifier.weight(1f)) {
+            AssetsLayout(asstesItems = asstesItems)
+            Divider()
+        }
         Divider()
-        LiabilitiesLayout(liabilitiesItems = liabilitiesItems)
-        Divider()
+        Column(modifier = Modifier.weight(1f)) {
+            LiabilitiesLayout(liabilitiesItems = liabilitiesItems)
+            Divider()
+        }
     }
 }
 @Composable
