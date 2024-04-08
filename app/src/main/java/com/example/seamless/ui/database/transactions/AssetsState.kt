@@ -6,10 +6,13 @@ import java.util.Date
 
 data class AssetsState(
     val assets: List<Assets> = emptyList(),
+    val typeID: Int = 0,
+    val acquisitionCatID: Int = 0,
     val name: String = "",
     val description: String = "",
     val acquiredDate: String = Date.from(Instant.now()).toString(),
     val divestmentDate: String ?= null,
     val worth: Double = 0.0,
-    val isAddingAsset: Boolean = false
+    val isAddingAsset: Boolean = false,
+    val sortAssets: SortOrder = SortOrder.ID
     )

@@ -15,4 +15,5 @@ sealed interface AssetsInsert{
     data class SetDivestmentDate(val date: Date): AssetsInsert
     data class SetWorth(val worth: Double): AssetsInsert
     data class DeleteAsset(val assets: Assets): AssetsInsert
+    data class SortAssets(val type: SortOrder): AssetsInsert
 }

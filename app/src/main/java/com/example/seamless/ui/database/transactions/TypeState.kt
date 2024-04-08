@@ -7,4 +7,5 @@ data class TypeState(
     val name: String = "",
     val description: String = "",
     val isAddingType: Boolean = false,
+    val sortType: SortOrder = SortOrder.ID
 )

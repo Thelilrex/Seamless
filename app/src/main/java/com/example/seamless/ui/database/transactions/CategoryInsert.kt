@@ -7,4 +7,5 @@ sealed interface CategoryInsert {
     data class SetType(val type: Type): CategoryInsert
     data class SetCategory(val category: String): CategoryInsert
     data class SetDescription(val description: String): CategoryInsert
+    data class SortCategory(val type: SortOrder): CategoryInsert
 }

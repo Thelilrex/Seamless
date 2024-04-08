@@ -13,31 +13,29 @@ import kotlinx.coroutines.flow.Flow
 interface AppDao{
     // functions for extracting all the data from the table
     @Transaction
-    @Query("Select * From Type")
+    @Query("Select * From Type Order By typeID")
     fun getAllType(): Flow<List<Type>>
 
     @Transaction
-    @Query("Select * From Category")
+    @Query("Select * From Category Order By categoryID")
     fun getAllCategory(): Flow<List<Category>>
 
     @Transaction
-    @Query("Select * From Income")
+    @Query("Select * From Income Order By date")
     fun getAllIncome(): Flow<List<Income>>
 
     @Transaction
-    @Query("Select * From Expenses")
+    @Query("Select * From Expenses Order By date")
     fun getAllExpenses(): Flow<List<Expenses>>
 
     @Transaction
-    @Query("Select * From AcquisitionCategory")
+    @Query("Select * From AcquisitionCategory Order By acquisitionCatID")
     fun getAllAcquisitionCategory(): Flow<List<AcquisitionCategory>>
 
     @Transaction
-    @Query("Select * From Assets")
+    @Query("Select * From Assets Order By acquiredDate")
     fun getAllAssets(): Flow<List<Assets>>
 
-    /*@Query("TRUNCATE Table Type")
-    fun deleteAllType()*/
 
 
     // functions for insert
@@ -80,9 +78,15 @@ interface AppDao{
     suspend fun updateAsset(assets: Assets)
 
 
+
     // functions for deletion
     @Delete
     suspend fun deleteType(type: Type)
+
+    @Query("delete from Type where typeID=:typeID")
+    suspend fun deleteTypeById(typeID:Int)
+
+
 
     @Delete
     suspend fun deleteCategory(category: Category)
