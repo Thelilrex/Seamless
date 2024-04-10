@@ -65,7 +65,7 @@ fun AddCatagories() {
 
         Row(
             modifier = Modifier
-                .padding(16.dp).height(50.dp),
+                .padding(16.dp).height(70.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             OutlinedTextField(
@@ -77,7 +77,7 @@ fun AddCatagories() {
         }
         Row(
             modifier = Modifier
-                .padding(16.dp).height(50.dp),
+                .padding(16.dp).height(70.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             OutlinedTextField(
@@ -89,7 +89,7 @@ fun AddCatagories() {
         }
         Row(
             modifier = Modifier
-                .padding(16.dp).height(50.dp),
+                .padding(16.dp).height(70.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             OutlinedTextField(
@@ -112,6 +112,7 @@ fun AddCatagories() {
                     .weight(1f)
                     .fillMaxHeight(),
                 onClick = {
+                    // Navigator to Browse Screen
 
                 }
             ) {
@@ -122,6 +123,8 @@ fun AddCatagories() {
                     .weight(1f)
                     .fillMaxHeight(),
                 onClick = {
+                    // Should connect the data to databases
+                    // Navigator to Browse Screen ---- Isamu
 
                 }
             ) {
