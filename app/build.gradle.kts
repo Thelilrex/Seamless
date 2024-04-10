@@ -70,7 +70,7 @@ dependencies {
 
     implementation("androidx.room:room-runtime:2.5.2")
     implementation("androidx.core:core-ktx:1.12.0")
-    ksp("androidx.room:room-compiler:2.5.2")
+    //ksp("androidx.room:room-compiler:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
 
     // Testing
@@ -137,7 +137,7 @@ android {
 }
 
 dependencies {
-
+    implementation ("androidx.compose.material:material:1.6.0")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     implementation("androidx.core:core-ktx:1.12.0")
