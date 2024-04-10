@@ -115,7 +115,6 @@ fun ExpensesLayout(expenseItems: List<ExpenseItem>)
     }
 }
 
-
 data class RevenueItem(val name: String, val amount: Double)
 data class ExpenseItem(val name: String, val amount: Double)
 @Preview
