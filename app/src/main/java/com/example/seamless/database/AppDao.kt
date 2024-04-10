@@ -1,4 +1,4 @@
-package com.example.seamless.ui.database
+package com.example.seamless.database
 
 import androidx.room.Dao
 import androidx.room.Delete
