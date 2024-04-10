@@ -50,7 +50,7 @@ android {
 }
 
 dependencies {
-
+    implementation ("androidx.compose.material:material:1.6.0")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     implementation("androidx.core:core-ktx:1.12.0")
