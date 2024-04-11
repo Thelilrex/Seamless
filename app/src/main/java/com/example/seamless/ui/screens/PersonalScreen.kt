@@ -117,7 +117,7 @@ fun SpendsButton(onImageClick: () -> Unit, modifier: Modifier = Modifier) {
                     contentScale = ContentScale.FillBounds
                 )
                 Text(
-                    text = "Spends",
+                    text = "Expenses",
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentWidth(Alignment.CenterHorizontally)
