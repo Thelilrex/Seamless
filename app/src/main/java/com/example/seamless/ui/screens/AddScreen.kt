@@ -22,7 +22,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AddCategories() {
+fun AddCategories(
+    modifier: Modifier,
+    onConfirmButtonClicked: () -> Unit = {},
+    onCancelButtonClicked: () -> Unit = {},
+) {
 
     val name = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
@@ -116,8 +120,7 @@ fun AddCategories() {
                     .weight(1f)
                     .fillMaxHeight(),
                 onClick = {
-                    // Navigator to Browse Screen
-
+                   onCancelButtonClicked()
                 }
             ) {
                 Text("Cancel")
@@ -127,7 +130,7 @@ fun AddCategories() {
                     .weight(1f)
                     .fillMaxHeight(),
                 onClick = {
-
+                    onConfirmButtonClicked()
                 }
             ) {
                 Text("Confirm")
@@ -140,5 +143,7 @@ fun AddCategories() {
 @Preview
 fun AddScreenPreview()
 {
-    AddCategories()
+    AddCategories(
+        modifier = Modifier
+    )
 }

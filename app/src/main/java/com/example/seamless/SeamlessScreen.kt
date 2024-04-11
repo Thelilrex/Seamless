@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.seamless.ui.screens.AddCategories
 import com.example.seamless.ui.screens.BusinessScreen
 import com.example.seamless.ui.screens.PersonalScreen
 import com.example.seamless.ui.screens.StartScreen
@@ -14,10 +15,8 @@ enum class SeamlessScreen {
     Start,
     Personal,
     Business,
-    BusinessExpense,
-    BusinesssRevenue,
-    PersonalExpense,
-    PersonalIncome,
+    BusinessAdd,
+    PersonalAdd,
     BusinessBrowse,
     PersonalBrowse
 }
@@ -58,11 +57,29 @@ fun SeamlessApp(
         }
 
         composable(route = SeamlessScreen.BusinessBrowse.name){}
-        composable(route = SeamlessScreen.BusinessExpense.name){}
-        composable(route = SeamlessScreen.BusinesssRevenue.name){}
+        composable(route = SeamlessScreen.BusinessAdd.name){
+            AddCategories(
+                modifier = Modifier,
+                onConfirmButtonClicked = {
+                    /* TODO: Implement Add Business Income/Expense*/
+                },
+                onCancelButtonClicked = {
+                    navigateUp(navController)
+                }
+            )
+        }
         composable(route = SeamlessScreen.PersonalBrowse.name){}
-        composable(route = SeamlessScreen.PersonalExpense.name){}
-        composable(route = SeamlessScreen.PersonalIncome.name){}
+        composable(route = SeamlessScreen.PersonalAdd.name){
+            AddCategories(
+                modifier = Modifier,
+                onConfirmButtonClicked = {
+                                         /* TODO: Implement Add Personal Income/Expense*/
+                },
+                onCancelButtonClicked = {
+                    navigateUp(navController)
+                }
+            )
+        }
     }
 }
 
@@ -70,4 +87,10 @@ private fun goHome(
     navController: NavHostController
 ) {
     navController.popBackStack(SeamlessScreen.Start.name, inclusive = false)
+}
+
+private fun navigateUp(
+    navController: NavHostController
+){
+    /* TODO: implement back navigation */
 }
