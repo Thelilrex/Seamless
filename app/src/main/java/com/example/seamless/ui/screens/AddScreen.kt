@@ -1,7 +1,5 @@
 package com.example.seamless.ui.screens
 
-import android.content.Context
-import android.widget.Space
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,14 +20,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.seamless.database.AppDao
-import com.example.seamless.database.Income
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @Composable
-fun AddCatagories(dao: AppDao) {
+fun AddCategories(
+    modifier: Modifier,
+    onConfirmButtonClicked: () -> Unit = {},
+    onCancelButtonClicked: () -> Unit = {},
+    databaseObject: Any
+) {
 
     val name = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
@@ -123,8 +121,7 @@ fun AddCatagories(dao: AppDao) {
                     .weight(1f)
                     .fillMaxHeight(),
                 onClick = {
-                    // Navigator to Browse Screen
-
+                   onCancelButtonClicked()
                 }
             ) {
                 Text("Cancel")
@@ -134,11 +131,7 @@ fun AddCatagories(dao: AppDao) {
                     .weight(1f)
                     .fillMaxHeight(),
                 onClick = {
-                    // Should connect the data to databases
-                    // Navigator to Browse Screen ---- Isamu
-                    CoroutineScope(Dispatchers.Main).launch {
-                        launch { dao.insertIncome(Income(categoryID = id.value.toInt(), name = name.value, description = description.value, amount = amount.value.toDouble())) }
-                    }
+                    onConfirmButtonClicked()
                 }
             ) {
                 Text("Confirm")
@@ -147,9 +140,12 @@ fun AddCatagories(dao: AppDao) {
     }
 }
 
-//@Composable
-//@Preview
-//fun AddScreenPreview()
-//{
-//    AddCatagories()
-//}
+@Composable
+@Preview
+fun AddScreenPreview()
+{
+    AddCategories(
+        modifier = Modifier,
+        databaseObject = Unit
+    )
+}

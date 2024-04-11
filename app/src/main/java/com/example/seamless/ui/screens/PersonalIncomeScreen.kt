@@ -42,7 +42,13 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 
 @Composable
-fun PersonalIncomesScreen() {
+fun PersonalIncomesScreen(
+    dataToList: () -> Unit = {},
+    onDeleteButtonClicked: () -> Unit = {},
+    onDialogueConfirmButtonClicked: () -> Unit = {},
+    databaseObject: Any
+) {
+    /*TODO: Call dataToList to turn database object into list then set browseItem*/
     var browseItem = listOf(
         BrowseItem(1, "Foods", "Cat1", "Burgers", 500.0),
         BrowseItem(2, "Entertainments", "Cat2", "Games", 114.0),
@@ -125,7 +131,9 @@ fun PersonalIncomesScreen() {
                     }
                     Spacer(modifier = Modifier.width(8.dp))
                     Button(
-                        onClick = { /* "Delete" */ },
+                        onClick = {
+                            onDeleteButtonClicked()
+                        },
                         modifier = Modifier
                             .weight(1f)
                             .height(70.dp)
@@ -172,8 +180,7 @@ fun PersonalIncomesScreen() {
 
                 Button(
                     onClick = {
-                        val amount = amountState.value.toDoubleOrNull() ?: 0.0
-                        showDialog.value = false
+                        onDialogueConfirmButtonClicked()
                     }
                 ) {
                     Text("Confirm")
@@ -278,8 +285,10 @@ data class BrowseItem(val setNumber: Int, val name: String, val categories: Stri
                       val description: String, val amount: Double)
 
 @Composable
-@Preview
+@Preview(backgroundColor = 0xFFFFFFFF)
 fun PersonalIncomesScreenPreview()
 {
-    PersonalIncomesScreen()
+    PersonalIncomesScreen(
+        databaseObject = {}
+    )
 }
