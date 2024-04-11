@@ -70,6 +70,21 @@ fun SeamlessApp(
                 }
             )
         }
+        composable(route = SeamlessScreen.PersonalIncome.name){
+
+        }
+
+        composable(route = SeamlessScreen.PersonalExpenses.name){
+
+        }
+
+        composable(route = SeamlessScreen.BusinessIncome.name){
+
+        }
+
+        composable(route = SeamlessScreen.BusinessExpenses.name){
+
+        }
 
         composable(route = SeamlessScreen.BusinessAdd.name){
             AddCategories(
