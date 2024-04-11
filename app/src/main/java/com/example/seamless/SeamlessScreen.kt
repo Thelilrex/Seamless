@@ -17,8 +17,10 @@ enum class SeamlessScreen {
     Business,
     BusinessAdd,
     PersonalAdd,
-    BusinessBrowse,
-    PersonalBrowse
+    BusinessIncome,
+    BusinessExpenses,
+    PersonalIncome,
+    PersonalExpenses
 }
 
 @Composable
@@ -56,7 +58,6 @@ fun SeamlessApp(
             )
         }
 
-        composable(route = SeamlessScreen.BusinessBrowse.name){}
         composable(route = SeamlessScreen.BusinessAdd.name){
             AddCategories(
                 modifier = Modifier,
@@ -69,7 +70,7 @@ fun SeamlessApp(
                 databaseObject = { /* TODO: Database Object Passed Here */}
             )
         }
-        composable(route = SeamlessScreen.PersonalBrowse.name){}
+
         composable(route = SeamlessScreen.PersonalAdd.name){
             AddCategories(
                 modifier = Modifier,
