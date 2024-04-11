@@ -13,7 +13,13 @@ import com.example.seamless.ui.screens.StartScreen
 enum class SeamlessScreen {
     Start,
     Personal,
-    Business
+    Business,
+    BusinessExpense,
+    BusinesssRevenue,
+    PersonalExpense,
+    PersonalIncome,
+    BusinessBrowse,
+    PersonalBrowse
 }
 
 @Composable
@@ -50,6 +56,13 @@ fun SeamlessApp(
                     currentScreen = 0}
             )
         }
+
+        composable(route = SeamlessScreen.BusinessBrowse.name){}
+        composable(route = SeamlessScreen.BusinessExpense.name){}
+        composable(route = SeamlessScreen.BusinesssRevenue.name){}
+        composable(route = SeamlessScreen.PersonalBrowse.name){}
+        composable(route = SeamlessScreen.PersonalExpense.name){}
+        composable(route = SeamlessScreen.PersonalIncome.name){}
     }
 }
 
