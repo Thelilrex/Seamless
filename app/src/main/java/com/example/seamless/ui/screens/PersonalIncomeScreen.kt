@@ -46,14 +46,10 @@ fun PersonalIncomesScreen() {
     var browseItem = listOf(
         BrowseItem(1, "Foods", "Cat1", "Burgers", 500.0),
         BrowseItem(2, "Entertainments", "Cat2", "Games", 114.0),
-        BrowseItem(3, "Transfers", "Cat3", "Train", 810.0),
-        BrowseItem(4, "Transport", "Cat4", "Plane", 1919.0),
-        BrowseItem(5, "Transport", "Cat5", "Taxi", 514.0),
-        BrowseItem(6, "Transport", "Cat6", "Bus", 2.0),
-        BrowseItem(7, "Transport", "Cat7", "Car", 10.0),
-        BrowseItem(8, "Transport", "Cat8", "Car1", 3.0),
-        BrowseItem(9, "Transport", "Cat9", "Car2", 2.0),
-        BrowseItem(10, "Transport", "Cat10", "Car3", 14.0),
+        BrowseItem(3, "Transfers", "Cat3", "George", 810.0),
+        BrowseItem(4, "Transport", "Cat4", "Taxi", 1919.0),
+        BrowseItem(5, "Cloth", "Cat5", "Shirts", 514.0),
+        BrowseItem(6, "Rent", "Cat6", "House", 2.0),
     )
     val showDialog = remember { mutableStateOf(false) }
     val buttonDouble1 = remember { mutableStateOf(0.0) }
@@ -70,30 +66,48 @@ fun PersonalIncomesScreen() {
         incomeValue2.value.toFloatOrNull() ?: 0f,
         incomeValue3.value.toFloatOrNull() ?: 0f
     )
-    val pieChartColors = listOf(Color.Gray, Color.Blue, Color.Yellow)
+    val pieChartColors = listOf(
+        Color(0xFFE91E63),
+        Color(0xFF9C27B0),
+        Color(0xFF673AB7),
+        Color(0xFFFF9800),
+        Color(0xFF3F51B5),
+        Color(0xFF2196F3),
+        Color(0xFF00BCD4),
+        Color(0xFF009688),
+        Color(0xFF4CAF50),
+        Color(0xFF8BC34A),
+        Color(0xFFCDDC39),
+        Color(0xFFFFEB3B),
+        Color(0xFFFFC107),
+        Color(0xFFFF5722),
+        Color(0xFF795548),
+        Color(0xFF9E9E9E),
+        Color(0xFF607D8B)
+    )
     val incomeTypes = listOf(incomeType1.value, incomeType2.value, incomeType3.value)
 
     Column(modifier = Modifier.fillMaxHeight()) {
 
         Column {
-            Column(modifier = Modifier.weight(1f)) {
+            Column(modifier = Modifier.weight(0.8f)) {
                 Row(modifier = Modifier.padding(16.dp)) {
                     PersonalIncomesPieChart(
-                        data = pieChartData,
+                        browseItems = browseItem,
                         colors = pieChartColors,
                         modifier = Modifier
-                            .weight(1f)
-                            .align(Alignment.CenterVertically)
                     )
+                }
+                Row(modifier = Modifier.padding(16.dp)) {
                     PersonalIncomeLegend(
-                        incomeTypes = incomeTypes,
+                        browseItems = browseItem,
                         colors = pieChartColors,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
                 BrowseItemsLayout(browseItem)
             }
-            Column(modifier = Modifier.weight(0.4f)) {
+            Column(modifier = Modifier.weight(0.1f)) {
                 Spacer(modifier = Modifier.weight(1f))
                 Row(
                     modifier = Modifier
@@ -172,43 +186,48 @@ fun PersonalIncomesScreen() {
 
 
 @Composable
-fun PersonalIncomesPieChart(data: List<Float>, colors: List<Color>, modifier: Modifier = Modifier) {
+fun PersonalIncomesPieChart(
+    browseItems: List<BrowseItem>,
+    colors: List<Color>,
+    modifier: Modifier = Modifier
+) {
     Box(
         modifier = modifier
             .padding(16.dp)
             .aspectRatio(1f)
     ) {
         Canvas(modifier = Modifier.fillMaxSize()) {
-            val total = data.sum()
+            val total = browseItems.sumOf {it.amount}
             var startAngle = 0f
-            data.forEachIndexed { index, value ->
-                val angle = (value / total) * 360f
+            browseItems.forEachIndexed { index, item ->
+                val angle = (item.amount.toFloat() / total) * 360f
                 val color = colors.getOrElse(index) { Color.Black }
                 drawArc(
                     color = color,
                     startAngle = startAngle,
-                    sweepAngle = angle,
+                    sweepAngle = angle.toFloat(),
                     useCenter = true,
                     topLeft = Offset.Zero,
                     size = Size(size.width, size.height)
                 )
-                startAngle += angle
+                startAngle += angle.toFloat()
             }
         }
     }
 }
 
 @Composable
-fun PersonalIncomeLegend(incomeTypes: List<String>, colors: List<Color>, modifier: Modifier = Modifier) {
+fun PersonalIncomeLegend(browseItems: List<BrowseItem>, colors: List<Color>, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
-        incomeTypes.forEachIndexed { index, incomeType ->
+        browseItems.forEachIndexed { index, item ->
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(modifier = Modifier
-                    .size(16.dp)
-                    .background(color = colors.getOrElse(index) { Color.Black }, shape = CircleShape)
+                Box(
+                    modifier = Modifier
+                        .size(16.dp)
+                        .background(color = colors.getOrElse(index) { Color.Black }, shape = CircleShape)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = incomeType)
+                Text(text = item.name)
             }
         }
     }
