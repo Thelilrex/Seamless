@@ -14,49 +14,50 @@ interface AppDao{
     // functions for extracting all the data from the table
     @Transaction
     @Query("Select * From Type Order By typeID")
-    fun getAllType(): Flow<List<Type>>
+    fun getAllType(): Flow<List<Type>> // We almost never use this
 
     @Transaction
     @Query("Select * From Category Order By categoryID")
-    fun getAllCategory(): Flow<List<Category>>
+    fun getAllCategory(): Flow<List<Category>> // We might use it but mostly no
 
     @Transaction
     @Query("Select * From Income Order By date Desc")
-    fun getAllIncome(): Flow<List<Income>>
+    fun getAllIncome(): Flow<List<Income>> // Most used stuff
 
     @Transaction
     @Query("Select * From Income Where categoryID=:id")
-    fun getIncomeByCategory(id : Int): Flow<List<Income>>
+    fun getIncomeByCategory(id : Int): Flow<List<Income>> // Most used stuff
 
     @Transaction
     @Query("Select * From Expenses Order By date Desc")
-    fun getAllExpenses(): Flow<List<Expenses>>
+    fun getAllExpenses(): Flow<List<Expenses>> // Most used stuff
     @Transaction
     @Query("Select * From Expenses Where categoryID=:id")
-    fun getExpensesByCategory(id : Int): Flow<List<Expenses>>
+    fun getExpensesByCategory(id : Int): Flow<List<Expenses>> // Most used stuff
 
     @Transaction
     @Query("Select * From AcquisitionCategory Order By acquisitionCatID")
-    fun getAllAcquisitionCategory(): Flow<List<AcquisitionCategory>>
+    fun getAllAcquisitionCategory(): Flow<List<AcquisitionCategory>> // Rarely used stuff
 
     @Transaction
     @Query("Select * From Assets Order By acquiredDate Desc")
-    fun getAllAssets(): Flow<List<Assets>>
+    fun getAllAssets(): Flow<List<Assets>> // Most used stuff
     @Transaction
     @Query("Select * From Assets Where acquisitionCatID=:id")
-    fun getAssetsByCategory(id : Int): Flow<List<Assets>>
+    fun getAssetsByCategory(id : Int): Flow<List<Assets>> // Most used stuff
 
 
 
     // functions for insert
     @Insert
-    suspend fun insertType(type: Type)
+    suspend fun insertType(type: Type) // Used by us to insert the personal and the business types
 
     @Insert
-    suspend fun insertCategory(category: Category)
-
+    suspend fun insertPersonalCategory(category: Category) // Used by the user to add a personal category
     @Insert
-    suspend fun insertIncome(income: Income)
+    suspend fun insertBusinessCategory(category: Category) // Used by the user to add a business category
+    @Insert
+    suspend fun insertIncome(income: Income) // Used by user to input the transaction
 
     @Insert
     suspend fun insertExpenses(expenses: Expenses)
@@ -69,6 +70,7 @@ interface AppDao{
 
 
     // functions for update
+    // Mostly useless for the current update
     @Update
     suspend fun updateType(type: Type)
 
@@ -91,21 +93,21 @@ interface AppDao{
 
     // functions for deletion
     @Delete
-    suspend fun deleteType(type: Type)
+    suspend fun deleteType(type: Type) // Rarely if not not used at all
     @Query("Delete From Type Where typeID = :iD")
-    suspend fun deleteTypeById(iD: Int)
+    suspend fun deleteTypeById(iD: Int) // Rarely or never used
 
     @Delete
-    suspend fun deleteCategory(category: Category)
+    suspend fun deleteCategory(category: Category) // Future update
 
     @Delete
-    suspend fun deleteIncome(income: Income)
-    @Query("Delete From Income Where incomeID = :iD")
+    suspend fun deleteIncome(income: Income) // Used by user to delete the income that has been entered [maybe future]
+    @Query("Delete From Income Where incomeID = :iD") // Used by user to delete the entry of income based on the id
     suspend fun deleteIncomeById(iD:Int)
 
     @Delete
-    suspend fun deleteExpenses(expenses: Expenses)
-    @Query("Delete From Expenses Where expenseID = :iD")
+    suspend fun deleteExpenses(expenses: Expenses) // Used by user to delete the income that has been entered [maybe future]
+    @Query("Delete From Expenses Where expenseID = :iD") // Used by user to delete the entry of income based on the id
     suspend fun deleteExpenseById(iD:Int)
 
     @Delete
@@ -115,5 +117,4 @@ interface AppDao{
     suspend fun deleteAsset(assets: Assets)
     @Query("Delete From Assets Where assetID = :iD")
     suspend fun deleteAssetsById(iD:Int)
-
 }

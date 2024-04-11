@@ -1,5 +1,6 @@
 package com.example.seamless.ui.screens
 
+import android.content.Context
 import android.widget.Space
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,40 +22,48 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.seamless.database.AppDao
+import com.example.seamless.database.Income
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
-fun AddCatagories() {
+fun AddCatagories(dao: AppDao) {
 
     val name = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
     val amount = remember { mutableStateOf("") }
     val defaultPadding = 8.dp
+    val id = remember { mutableStateOf("") }
 
     Column(modifier = Modifier.padding(defaultPadding)) {
         Row(
             modifier = Modifier
                 .horizontalScroll(rememberScrollState())
-                .padding(16.dp).height(50.dp),
+                .padding(16.dp)
+                .height(50.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
+
             Button(modifier = Modifier.height(50.dp),
-                onClick = {  }) {
+                onClick = {id.value = "1"}) {
                 Text("Button1")
             }
             Button(modifier = Modifier.height(50.dp),
-                onClick = { /* onclick */ }) {
+                onClick = {id.value = "2"}) {
                 Text("Button2")
             }
             Button(modifier = Modifier.height(50.dp),
-                onClick = { /* onclick */ }) {
+                onClick = {id.value = "3"}) {
                 Text("Button3")
             }
             Button(modifier = Modifier.height(50.dp),
-                onClick = { /* onclick */ }) {
+                onClick = {id.value = "4"}) {
                 Text("Button4")
             }
             Button(modifier = Modifier.height(50.dp),
-                onClick = { /* onclick */ }) {
+                onClick = {id.value = "5"}) {
                 Text("Button5")
             }
             Button(modifier = Modifier.height(50.dp),
@@ -62,10 +71,10 @@ fun AddCatagories() {
                 Text("Add+")
             }
         }
-
         Row(
             modifier = Modifier
-                .padding(16.dp).height(70.dp),
+                .padding(16.dp)
+                .height(70.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             OutlinedTextField(
@@ -77,7 +86,8 @@ fun AddCatagories() {
         }
         Row(
             modifier = Modifier
-                .padding(16.dp).height(70.dp),
+                .padding(16.dp)
+                .height(70.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             OutlinedTextField(
@@ -89,7 +99,8 @@ fun AddCatagories() {
         }
         Row(
             modifier = Modifier
-                .padding(16.dp).height(70.dp),
+                .padding(16.dp)
+                .height(70.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             OutlinedTextField(
@@ -125,7 +136,9 @@ fun AddCatagories() {
                 onClick = {
                     // Should connect the data to databases
                     // Navigator to Browse Screen ---- Isamu
-
+                    CoroutineScope(Dispatchers.Main).launch {
+                        launch { dao.insertIncome(Income(categoryID = id.value.toInt(), name = name.value, description = description.value, amount = amount.value.toDouble())) }
+                    }
                 }
             ) {
                 Text("Confirm")
@@ -134,9 +147,9 @@ fun AddCatagories() {
     }
 }
 
-@Composable
-@Preview
-fun AddScreenPreview()
-{
-    AddCatagories()
-}
+//@Composable
+//@Preview
+//fun AddScreenPreview()
+//{
+//    AddCatagories()
+//}

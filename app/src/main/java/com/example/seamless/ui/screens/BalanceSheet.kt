@@ -32,7 +32,7 @@ import com.example.seamless.R
 @Composable
 fun BalanceSheet()
 {
-    var asstesItems = listOf(
+    var assetsItems = listOf(
         AssetsItem("Revenue1", 114.0),
         AssetsItem("Revenue2", 810.0)
     )
@@ -40,15 +40,15 @@ fun BalanceSheet()
         LiabilitiesItem("Expense1", 114.0),
         LiabilitiesItem("Expense2", 810.0)
     )
-    BalanceSheetLayout(asstesItems, liabilitiesItems)
+    BalanceSheetLayout(assetsItems, liabilitiesItems)
 }
 
 @Composable
-fun BalanceSheetLayout(asstesItems: List<AssetsItem>, liabilitiesItems: List<LiabilitiesItem>) {
+fun BalanceSheetLayout(assetsItems: List<AssetsItem>, liabilitiesItems: List<LiabilitiesItem>) {
     Column(modifier = Modifier.fillMaxHeight()) {
         Divider()
         Column(modifier = Modifier.weight(1f)) {
-            AssetsLayout(asstesItems = asstesItems)
+            AssetsLayout(assetsItems = assetsItems)
             Divider()
         }
         Divider()
@@ -59,11 +59,11 @@ fun BalanceSheetLayout(asstesItems: List<AssetsItem>, liabilitiesItems: List<Lia
     }
 }
 @Composable
-fun AssetsLayout(asstesItems: List<AssetsItem>)
+fun AssetsLayout(assetsItems: List<AssetsItem>)
 {
     Column (modifier = Modifier) {
         Text(
-            text = "Assetes",
+            text = "Assets",
             style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 20.sp)
         )
         Row (
@@ -72,13 +72,13 @@ fun AssetsLayout(asstesItems: List<AssetsItem>)
         )
         {
             Column(modifier = Modifier.weight(1f)) {
-                asstesItems.forEach{
-                        asstesItem -> Text(text = asstesItem.name)
+                assetsItems.forEach{
+                        assetsItem -> Text(text = assetsItem.name)
                 }
             }
             Column(modifier = Modifier.weight(1f)) {
-                asstesItems.forEach{
-                        asstesItem -> Text(text = "$" + asstesItem.amount.toString())
+                assetsItems.forEach{
+                        assetsItem -> Text(text = "$" + assetsItem.amount.toString())
                 }
             }
         }
