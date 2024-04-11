@@ -65,7 +65,8 @@ fun SeamlessApp(
                 },
                 onCancelButtonClicked = {
                     navigateUp(navController)
-                }
+                },
+                databaseObject = { /* TODO: Database Object Passed Here */}
             )
         }
         composable(route = SeamlessScreen.PersonalBrowse.name){}
@@ -73,11 +74,12 @@ fun SeamlessApp(
             AddCategories(
                 modifier = Modifier,
                 onConfirmButtonClicked = {
-                                         /* TODO: Implement Add Personal Income/Expense*/
+                    /* TODO: Implement Add Business Income/Expense*/
                 },
                 onCancelButtonClicked = {
                     navigateUp(navController)
-                }
+                },
+                databaseObject = { /* TODO: Database Object Passed Here */}
             )
         }
     }
