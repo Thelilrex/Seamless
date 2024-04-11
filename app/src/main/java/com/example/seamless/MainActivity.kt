@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    PersonalIncomesScreen()
+                    SeamlessApp()
                     //val dao = AppDatabase.getDatabase(applicationContext).appDao()
                     // As of now we need to pass this dao to implement the databases
                 }
