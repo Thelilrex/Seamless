@@ -46,7 +46,14 @@ fun SeamlessApp(
             PersonalScreen(
                 modifier = Modifier,
                 onHomeButtonClicked = { goHome(navController = navController)
-                    currentScreen = 0}
+                    currentScreen = 0},
+                onIncomeButtonClicked = {
+                    navController.navigate(SeamlessScreen.PersonalIncome.name)
+                },
+                onSpendsButtonClicked = {
+                    navController.navigate(SeamlessScreen.PersonalExpenses.name)
+                }
+
             )
         }
 
