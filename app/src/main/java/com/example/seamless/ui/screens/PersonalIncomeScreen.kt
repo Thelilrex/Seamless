@@ -122,7 +122,9 @@ fun PersonalIncomesScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Button(
-                        onClick = {showDialog.value = true},
+                        onClick = {showDialog.value = true
+                            //should go to add screen
+                                  },
                         modifier = Modifier
                             .weight(1f)
                             .height(70.dp)
@@ -189,7 +191,6 @@ fun PersonalIncomesScreen(
         }
     }
 }
-
 
 
 @Composable
