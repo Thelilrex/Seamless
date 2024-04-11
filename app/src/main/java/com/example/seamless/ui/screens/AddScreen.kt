@@ -26,6 +26,7 @@ fun AddCategories(
     modifier: Modifier,
     onConfirmButtonClicked: () -> Unit = {},
     onCancelButtonClicked: () -> Unit = {},
+    databaseObject: Any
 ) {
 
     val name = remember { mutableStateOf("") }
@@ -144,6 +145,7 @@ fun AddCategories(
 fun AddScreenPreview()
 {
     AddCategories(
-        modifier = Modifier
+        modifier = Modifier,
+        databaseObject = Unit
     )
 }
