@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.seamless.ui.screens.AddCategories
 import com.example.seamless.ui.screens.BusinessScreen
+import com.example.seamless.ui.screens.PersonalIncomesScreen
 import com.example.seamless.ui.screens.PersonalScreen
 import com.example.seamless.ui.screens.StartScreen
 
@@ -71,21 +72,42 @@ fun SeamlessApp(
             )
         }
         composable(route = SeamlessScreen.PersonalIncome.name){
-
+            PersonalIncomesScreen(
+                dataToList = {/*TODO: Define function to take in DAO and return list of all personal Income items*/},
+                onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Income*/},
+                onDeleteButtonClicked = {/*TODO: Delete from Personal Income*/},
+                databaseObject = { /* TODO: Database Object Passed Here */},
+            )
         }
 
         composable(route = SeamlessScreen.PersonalExpenses.name){
-
+            PersonalIncomesScreen(
+                dataToList = {/*TODO: Define function to take in DAO and return list of all personal expense items*/},
+                onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Expenses*/},
+                onDeleteButtonClicked = {/*TODO: Delete from Personal Expenses*/},
+                databaseObject = { /* TODO: Database Object Passed Here */},
+            )
         }
 
         composable(route = SeamlessScreen.BusinessIncome.name){
-
+            PersonalIncomesScreen(
+                dataToList = {/*TODO: Define function to take in DAO and return list of all business income items*/},
+                onDialogueConfirmButtonClicked = {/*TODO: Add to Business Income*/},
+                onDeleteButtonClicked = {/*TODO: Delete from Business Income*/},
+                databaseObject = { /* TODO: Database Object Passed Here */},
+            )
         }
 
         composable(route = SeamlessScreen.BusinessExpenses.name){
-
+            PersonalIncomesScreen(
+                dataToList = {/*TODO: Define function to take in DAO and return list of all business expense items*/},
+                onDialogueConfirmButtonClicked = {/*TODO: Add to Business Expense*/},
+                onDeleteButtonClicked = {/*TODO: Delete from Business Expense*/},
+                databaseObject = { /* TODO: Database Object Passed Here */},
+            )
         }
 
+        //NOTE: Add Categories functions never get called and can't be navigated to because there's no buttons for them in UI!?
         composable(route = SeamlessScreen.BusinessAdd.name){
             AddCategories(
                 modifier = Modifier,
