@@ -54,6 +54,7 @@ fun PersonalIncomesScreen(
     databaseObject: Any,
     incomeToList: () -> Unit = {},
     expenseToList: () -> Unit = {},
+    // Dialog for delete, take ID.
     // add the navigation for the personal / Business SpendsScreen
     // navigate add+ button to the dialog,
     // and then navigate add button to add-screen
@@ -144,7 +145,7 @@ fun PersonalIncomesScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Button(
-                        onClick = {}, // Shows the dialog
+                        onClick = {onAddButtonClicked()}, // Shows the dialog
 //                            onAddButtonClicked()
 
                         modifier = Modifier
@@ -156,80 +157,13 @@ fun PersonalIncomesScreen(
                     Spacer(modifier = Modifier.width(8.dp))
                     Button(
                         onClick = {
-                            onDeleteButtonClicked()
+                            showDialog.value = true
                         },
                         modifier = Modifier
                             .weight(1f)
                             .height(70.dp)
                     ) {
                         Text("Delete")
-                    }
-                }
-            }
-        }
-    }
-    if (showDialog.value) {
-        Dialog(onDismissRequest = { showDialog.value = false }) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                val nameState = remember { mutableStateOf("") }
-                val amountState = remember { mutableStateOf("") }
-                val descriptionState = remember { mutableStateOf("") }
-
-                Text(text = "Input Value：")
-                OutlinedTextField(
-                    value = nameState.value,
-                    onValueChange = { nameState.value = it },
-                    label = { Text("Name") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = amountState.value,
-                    onValueChange = { amountState.value = it },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-                    label = { Text("Amount") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = descriptionState.value,
-                    onValueChange = { descriptionState.value = it },
-                    label = { Text("Description") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(10.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Button(
-                        onClick = {
-//                            incomeItem.add(Income(setNumber, nameState.value, "Cat" + categories.toString(),
-//                                descriptionState.value, amountState.value.toDouble()))
-                            incomeItem.add(Income(name = nameState.value, description = descriptionState.value,
-                                amount = amountState.value.toDouble(), categoryID = categories))
-                            //name = "Name1", description = "Description1", amount = 150.0, categoryID = 1
-                            showDialog.value = false
-                            setNumber++
-                            categories++
-                            onDialogueConfirmButtonClicked()
-
-                            /*TODO: Storage to database*/
-                        }
-                    ) {
-                        Text("Confirm")
-                    }
-                    Button(
-                        onClick = {
-                            onAddButtonClicked()
-                        }
-                    ) {
-                        Text("Add Screen")
                     }
                 }
             }

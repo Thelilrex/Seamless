@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
@@ -15,12 +16,16 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import com.example.seamless.database.Income
 
 @Composable
 fun ParentScreen() {
@@ -35,6 +40,7 @@ fun AddCategories(
     showDialog: MutableState<Boolean>,
     onConfirmButtonClicked: () -> Unit = {},
     onCancelButtonClicked: () -> Unit = {},
+    onDialogueConfirmButtonClicked: () -> Unit = {},
     //databaseObject: Any
 ) {
     val name = remember { mutableStateOf("") }
@@ -42,108 +48,198 @@ fun AddCategories(
     val amount = remember { mutableStateOf("") }
     val defaultPadding = 8.dp
     val id = remember { mutableStateOf("") }
-
+    val incomeItem = remember { mutableListOf<Income>() }
+    var setNumber by remember { mutableStateOf(1) }
+    var categories by remember { mutableStateOf(1) }
 
     Column(modifier = Modifier.padding(defaultPadding)) {
         Row(
             modifier = Modifier
                 .horizontalScroll(rememberScrollState())
-                .padding(16.dp)
+                .padding(20.dp)
                 .height(50.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
 
             Button(modifier = Modifier.height(50.dp),
-                onClick = {id.value = "1"}) {
+                onClick = {
+                    id.value = "1"
+                    showDialog.value = true
+                }) {
                 Text("Food")
             }
             Button(modifier = Modifier.height(50.dp),
-                onClick = {id.value = "2"}) {
+                onClick = {
+                    id.value = "2"
+                    showDialog.value = true
+                }) {
                 Text("Entertainments")
             }
             Button(modifier = Modifier.height(50.dp),
-                onClick = {id.value = "3"}) {
+                onClick = {
+                    id.value = "3"
+                    showDialog.value = true
+                }) {
                 Text("Rent")
             }
             Button(modifier = Modifier.height(50.dp),
-                onClick = {id.value = "4"}) {
+                onClick = {
+                    id.value = "4"
+                    showDialog.value = true
+                }) {
                 Text("Transport")
             }
             Button(modifier = Modifier.height(50.dp),
-                onClick = {id.value = "5"}) {
+                onClick = {
+                    id.value = "5"
+                    showDialog.value = true
+                }) {
                 Text("Cloth")
             }
             Button(modifier = Modifier.height(50.dp),
-                onClick = {showDialog.value = true}) {
+                onClick = { showDialog.value = true }) {
                 Text("Add+")
             }
         }
-        Row(
-            modifier = Modifier
-                .padding(16.dp)
-                .height(70.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            OutlinedTextField(
-                value = name.value,
-                onValueChange = { name.value = it },
-                label = { Text("Name") },
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-        Row(
-            modifier = Modifier
-                .padding(16.dp)
-                .height(70.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            OutlinedTextField(
-                value = description.value,
-                onValueChange = { description.value = it },
-                label = { Text("Description") },
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-        Row(
-            modifier = Modifier
-                .padding(16.dp)
-                .height(70.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            OutlinedTextField(
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                value = amount.value,
-                onValueChange = { amount.value = it },
-                label = { Text("Amount") },
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
+//        Row(
+//            modifier = Modifier
+//                .padding(16.dp)
+//                .height(70.dp),
+//            horizontalArrangement = Arrangement.spacedBy(8.dp)
+//        ) {
+//            OutlinedTextField(
+//                value = name.value,
+//                onValueChange = { name.value = it },
+//                label = { Text("Name") },
+//                modifier = Modifier.fillMaxWidth()
+//            )
+//        }
+//        Row(
+//            modifier = Modifier
+//                .padding(16.dp)
+//                .height(70.dp),
+//            horizontalArrangement = Arrangement.spacedBy(8.dp)
+//        ) {
+//            OutlinedTextField(
+//                value = description.value,
+//                onValueChange = { description.value = it },
+//                label = { Text("Description") },
+//                modifier = Modifier.fillMaxWidth()
+//            )
+//        }
+//        Row(
+//            modifier = Modifier
+//                .padding(16.dp)
+//                .height(70.dp),
+//            horizontalArrangement = Arrangement.spacedBy(8.dp)
+//        ) {
+//            OutlinedTextField(
+//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+//                value = amount.value,
+//                onValueChange = { amount.value = it },
+//                label = { Text("Amount") },
+//                modifier = Modifier.fillMaxWidth()
+//            )
+//        }
 
         Row(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(30.dp)
                 .height(50.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(80.dp)
         ) {
             Button(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxHeight(),
                 onClick = {
-                   onCancelButtonClicked()
+                    onCancelButtonClicked()
                 }
             ) {
                 Text("Cancel")
             }
-            Button(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight(),
-                onClick = {
-                    onConfirmButtonClicked()
+            if (showDialog.value) {
+                Dialog(onDismissRequest = { showDialog.value = false }) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        val nameState = remember { mutableStateOf("") }
+                        val amountState = remember { mutableStateOf("") }
+                        val descriptionState = remember { mutableStateOf("") }
+
+                        Text(text = "Input Value：")
+                        OutlinedTextField(
+                            value = nameState.value,
+                            onValueChange = { nameState.value = it },
+                            label = { Text("Name") },
+                            modifier = Modifier.fillMaxWidth()
+                        )
+
+                        Spacer(modifier = Modifier.height(8.dp))
+                        OutlinedTextField(
+                            value = amountState.value,
+                            onValueChange = { amountState.value = it },
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                            label = { Text("Amount") },
+                            modifier = Modifier.fillMaxWidth()
+                        )
+
+                        Spacer(modifier = Modifier.height(8.dp))
+                        OutlinedTextField(
+                            value = descriptionState.value,
+                            onValueChange = { descriptionState.value = it },
+                            label = { Text("Description") },
+                            modifier = Modifier.fillMaxWidth()
+                        )
+
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(10.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Button(
+                                onClick = {
+//                            incomeItem.add(Income(setNumber, nameState.value, "Cat" + categories.toString(),
+//                                descriptionState.value, amountState.value.toDouble()))
+                                    incomeItem.add(
+                                        Income(
+                                            name = nameState.value,
+                                            description = descriptionState.value,
+                                            amount = amountState.value.toDouble(),
+                                            categoryID = categories
+                                        )
+                                    )
+                                    //name = "Name1", description = "Description1", amount = 150.0, categoryID = 1
+                                    showDialog.value = false
+                                    setNumber++
+                                    categories++
+                                    onDialogueConfirmButtonClicked()
+
+                                    /*TODO: Storage to database*/
+                                }
+                            ) {
+                                Text("Confirm")
+                            }
+                            Button(
+                                onClick = {
+
+                                }
+                            ) {
+                                Text("Add Screen")
+                            }
+                        }
+                    }
                 }
-            ) {
-                Text("Confirm")
+//            Button(
+//                modifier = Modifier
+//                    .weight(1f)
+//                    .fillMaxHeight(),
+//                onClick = {
+//                    onConfirmButtonClicked()
+//                }
+//            ) {
+//                Text("Confirm")
+//            }
             }
         }
     }
