@@ -71,6 +71,7 @@ fun SeamlessApp(
                 }
             )
         }
+
         composable(route = SeamlessScreen.PersonalIncome.name){
             PersonalIncomesScreen(
                 dataToList = {/*TODO: Define function to take in DAO and return list of all personal Income items*/},
