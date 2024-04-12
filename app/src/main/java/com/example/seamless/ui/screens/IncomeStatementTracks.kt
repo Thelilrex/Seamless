@@ -86,7 +86,6 @@ fun RevenuesLayout(revenueItems: List<RevenueItem>)
     }
 }
 
-
 @Composable
 fun ExpensesLayout(expenseItems: List<ExpenseItem>)
 {

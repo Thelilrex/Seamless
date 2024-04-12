@@ -42,6 +42,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.example.seamless.database.Expenses
+import com.example.seamless.database.Income
 
 @Composable
 fun PersonalIncomesScreen(
@@ -49,7 +51,16 @@ fun PersonalIncomesScreen(
     onDeleteButtonClicked: () -> Unit = {},
     onDialogueConfirmButtonClicked: () -> Unit = {},
     onAddButtonClicked:() -> Unit = {},
-    databaseObject: Any
+    databaseObject: Any,
+    incomeToList: () -> Unit = {},
+    expenseToList: () -> Unit = {},
+    // Dialog for delete, take ID.
+    // add the navigation for the personal / Business SpendsScreen
+    // navigate add+ button to the dialog,
+    // and then navigate add button to add-screen
+    // change the background of the dialog
+    // the buttons or drop down menu
+    // lock text field until they select one categories button (food.etc)
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
     val browseItem = remember { mutableListOf<BrowseItem>(
@@ -60,6 +71,11 @@ fun PersonalIncomesScreen(
 //        BrowseItem(5, "Cloth", "Cat5", "Shirts", 514.0),
 //        BrowseItem(6, "Rent", "Cat6", "House", 2.0),
     ) }
+    val incomeItem = remember { mutableListOf<Income>()}
+    val expenseItem = remember { mutableListOf<Expenses>()}
+
+    val income: Income = Income(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
+
     val showDialog = remember { mutableStateOf(false) }
     val buttonDouble1 = remember { mutableStateOf(0.0) }
 
@@ -105,19 +121,20 @@ fun PersonalIncomesScreen(
             Column(modifier = Modifier.weight(0.8f)) {
                 Row(modifier = Modifier.padding(16.dp)) {
                     PersonalIncomesPieChart(
-                        browseItems = browseItem,
+//                        browseItems = browseItem,
+                        income = incomeItem,
                         colors = pieChartColors,
                         modifier = Modifier
                     )
                 }
                 Row(modifier = Modifier.padding(16.dp)) {
                     PersonalIncomeLegend(
-                        browseItems = browseItem,
+                        income = incomeItem,
                         colors = pieChartColors,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
-                BrowseItemsLayout(browseItem)
+                BrowseItemsLayout(incomeItem)
             }
             Column(modifier = Modifier.weight(0.1f)) {
                 Spacer(modifier = Modifier.weight(1f))
@@ -128,9 +145,9 @@ fun PersonalIncomesScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Button(
-                        onClick = {showDialog.value = true
+                        onClick = {onAddButtonClicked()}, // Shows the dialog
 //                            onAddButtonClicked()
-                                  },
+
                         modifier = Modifier
                             .weight(1f)
                             .height(70.dp)
@@ -140,7 +157,7 @@ fun PersonalIncomesScreen(
                     Spacer(modifier = Modifier.width(8.dp))
                     Button(
                         onClick = {
-                            onDeleteButtonClicked()
+                            showDialog.value = true
                         },
                         modifier = Modifier
                             .weight(1f)
@@ -152,76 +169,12 @@ fun PersonalIncomesScreen(
             }
         }
     }
-    if (showDialog.value) {
-        Dialog(onDismissRequest = { showDialog.value = false }) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                val nameState = remember { mutableStateOf("") }
-                val amountState = remember { mutableStateOf("") }
-                val descriptionState = remember { mutableStateOf("") }
-
-                Text(text = "Input Value：")
-                OutlinedTextField(
-                    value = nameState.value,
-                    onValueChange = { nameState.value = it },
-                    label = { Text("Name") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = amountState.value,
-                    onValueChange = { amountState.value = it },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-                    label = { Text("Amount") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = descriptionState.value,
-                    onValueChange = { descriptionState.value = it },
-                    label = { Text("Description") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(10.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Button(
-                        onClick = {
-                            browseItem.add(BrowseItem(setNumber, nameState.value, "Cat" + categories.toString(),
-                                descriptionState.value, amountState.value.toDouble()))
-                            showDialog.value = false
-                            setNumber++
-                            categories++
-                            onDialogueConfirmButtonClicked()
-
-                            /*TODO: Storage to database*/
-                        }
-                    ) {
-                        Text("Confirm")
-                    }
-                    Button(
-                        onClick = {
-                            onAddButtonClicked()
-                        }
-                    ) {
-                        Text("Add Screen")
-                    }
-                }
-            }
-        }
-    }
 }
 
 
 @Composable
 fun PersonalIncomesPieChart(
-    browseItems: List<BrowseItem>,
+    income: List<Income>,
     colors: List<Color>,
     modifier: Modifier = Modifier
 ) {
@@ -231,9 +184,9 @@ fun PersonalIncomesPieChart(
             .aspectRatio(1f)
     ) {
         Canvas(modifier = Modifier.fillMaxSize()) {
-            val total = browseItems.sumOf {it.amount}
+            val total = income.sumOf {it.amount}
             var startAngle = 0f
-            browseItems.forEachIndexed { index, item ->
+            income.forEachIndexed { index, item ->
                 val angle = (item.amount.toFloat() / total) * 360f
                 val color = colors.getOrElse(index) { Color.Black }
                 drawArc(
@@ -251,9 +204,11 @@ fun PersonalIncomesPieChart(
 }
 
 @Composable
-fun PersonalIncomeLegend(browseItems: List<BrowseItem>, colors: List<Color>, modifier: Modifier = Modifier) {
+fun PersonalIncomeLegend(income: List<Income>, colors: List<Color>, modifier: Modifier = Modifier) {
+//    fun PersonalIncomeLegend(browseItems: List<BrowseItem>, colors: List<Color>, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
-        browseItems.forEachIndexed { index, item ->
+        income.forEachIndexed { index, item ->
+//            browseItems.forEachIndexed { index, item ->
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier = Modifier
@@ -271,7 +226,8 @@ fun PersonalIncomeLegend(browseItems: List<BrowseItem>, colors: List<Color>, mod
 }
 
 @Composable
-fun BrowseItemsLayout(browseItems: List<BrowseItem>) {
+fun BrowseItemsLayout(income: List<Income>) {
+//    fun BrowseItemsLayout(browseItems: List<BrowseItem>) {
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -296,7 +252,7 @@ fun BrowseItemsLayout(browseItems: List<BrowseItem>) {
         }
     }
     LazyColumn{
-        items(browseItems) { item ->
+        items(income) { item ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -304,8 +260,19 @@ fun BrowseItemsLayout(browseItems: List<BrowseItem>) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(text = item.name, modifier = Modifier.weight(1f))
-                Text(text = item.categories, modifier = Modifier.weight(1f))
-                Text(text = item.description, modifier = Modifier.weight(1f))
+                val text = when (item.categoryID) {
+                    1 -> "Food"
+                    2 -> "Entertainments"
+                    3 -> "Rent"
+                    4 -> "Transport"
+                    5 -> "Cloth"
+                    else -> "Else"
+                }
+                Text(
+                    text = text,
+                    modifier = Modifier.weight(1f)
+                )
+                Text(text = item.description.toString(), modifier = Modifier.weight(1f))
                 Text(text = "$${item.amount}", modifier = Modifier.weight(1f))
             }
         }
