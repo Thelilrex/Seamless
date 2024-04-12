@@ -21,7 +21,7 @@ enum class SeamlessScreen {
     BusinessIncome,
     BusinessExpenses,
     PersonalIncome,
-    PersonalExpenses
+    PersonalExpenses,
 }
 
 @Composable
@@ -76,6 +76,7 @@ fun SeamlessApp(
                 dataToList = {/*TODO: Define function to take in DAO and return list of all personal Income items*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Income*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Personal Income*/},
+                onAddButtonClicked = {navController.navigate(SeamlessScreen.PersonalAdd.name)},
                 databaseObject = { /* TODO: Database Object Passed Here */},
             )
         }

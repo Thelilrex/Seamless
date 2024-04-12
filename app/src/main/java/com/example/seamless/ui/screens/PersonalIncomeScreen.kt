@@ -46,6 +46,7 @@ fun PersonalIncomesScreen(
     dataToList: () -> Unit = {},
     onDeleteButtonClicked: () -> Unit = {},
     onDialogueConfirmButtonClicked: () -> Unit = {},
+    onAddButtonClicked:() -> Unit = {},
     databaseObject: Any
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
@@ -124,6 +125,7 @@ fun PersonalIncomesScreen(
                     Button(
                         onClick = {showDialog.value = true
                             //should go to add screen
+                            onAddButtonClicked()
                                   },
                         modifier = Modifier
                             .weight(1f)
