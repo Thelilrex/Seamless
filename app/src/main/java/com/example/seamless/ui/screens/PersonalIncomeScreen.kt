@@ -30,8 +30,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.text.TextStyle
@@ -50,14 +52,14 @@ fun PersonalIncomesScreen(
     databaseObject: Any
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
-    var browseItem = listOf(
-        BrowseItem(1, "Foods", "Cat1", "Burgers", 500.0),
-        BrowseItem(2, "Entertainments", "Cat2", "Games", 114.0),
-        BrowseItem(3, "Transfers", "Cat3", "George", 810.0),
-        BrowseItem(4, "Transport", "Cat4", "Taxi", 1919.0),
-        BrowseItem(5, "Cloth", "Cat5", "Shirts", 514.0),
-        BrowseItem(6, "Rent", "Cat6", "House", 2.0),
-    )
+    val browseItem = remember { mutableListOf<BrowseItem>(
+//        BrowseItem(1, "Foods", "Cat1", "Burgers", 500.0),
+//        BrowseItem(2, "Entertainments", "Cat2", "Games", 114.0),
+//        BrowseItem(3, "Transfers", "Cat3", "George", 810.0),
+//        BrowseItem(4, "Transport", "Cat4", "Taxi", 1919.0),
+//        BrowseItem(5, "Cloth", "Cat5", "Shirts", 514.0),
+//        BrowseItem(6, "Rent", "Cat6", "House", 2.0),
+    ) }
     val showDialog = remember { mutableStateOf(false) }
     val buttonDouble1 = remember { mutableStateOf(0.0) }
 
@@ -67,6 +69,9 @@ fun PersonalIncomesScreen(
     val incomeValue1 = remember { mutableStateOf("") }
     val incomeValue2 = remember { mutableStateOf("") }
     val incomeValue3 = remember { mutableStateOf("") }
+
+    var setNumber by remember { mutableStateOf(1) }
+    var categories by remember { mutableStateOf(1) }
 
     val pieChartData = listOf(
         incomeValue1.value.toFloatOrNull() ?: 0f,
@@ -188,7 +193,14 @@ fun PersonalIncomesScreen(
                 ) {
                     Button(
                         onClick = {
+                            browseItem.add(BrowseItem(setNumber, nameState.value, "Cat" + categories.toString(),
+                                descriptionState.value, amountState.value.toDouble()))
+                            showDialog.value = false
+                            setNumber++
+                            categories++
                             onDialogueConfirmButtonClicked()
+
+                            /*TODO: Storage to database*/
                         }
                     ) {
                         Text("Confirm")
@@ -246,7 +258,10 @@ fun PersonalIncomeLegend(browseItems: List<BrowseItem>, colors: List<Color>, mod
                 Box(
                     modifier = Modifier
                         .size(16.dp)
-                        .background(color = colors.getOrElse(index) { Color.Black }, shape = CircleShape)
+                        .background(
+                            color = colors.getOrElse(index) { Color.Black },
+                            shape = CircleShape
+                        )
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(text = item.name)
