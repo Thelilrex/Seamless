@@ -1,6 +1,8 @@
 package com.example.seamless
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -55,7 +57,6 @@ fun SeamlessApp(
                 onSpendsButtonClicked = {
                     navController.navigate(SeamlessScreen.PersonalExpenses.name)
                 }
-
             )
         }
 
@@ -90,7 +91,8 @@ fun SeamlessApp(
                 dataToList = {/*TODO: Define function to take in DAO and return list of all personal expense items*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Expenses*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Personal Expenses*/},
-                databaseObject = { /* TODO: Database Object Passed Here */},
+                //databaseObject = { /* TODO: Database Object Passed Here */},
+                showDialog = remember { mutableStateOf(false) }
             )
         }
 
@@ -108,7 +110,8 @@ fun SeamlessApp(
                 dataToList = {/*TODO: Define function to take in DAO and return list of all business expense items*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Business Expense*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Business Expense*/},
-                databaseObject = { /* TODO: Database Object Passed Here */},
+                //databaseObject = { /* TODO: Database Object Passed Here */},
+                showDialog = remember { mutableStateOf(false) }
             )
         }
 
@@ -122,7 +125,8 @@ fun SeamlessApp(
                 onCancelButtonClicked = {
                     navigateUp(navController)
                 },
-                databaseObject = { /* TODO: Database Object Passed Here */}
+                //databaseObject = { /* TODO: Database Object Passed Here */}
+                showDialog = remember { mutableStateOf(false) }
             )
         }
 
@@ -135,7 +139,8 @@ fun SeamlessApp(
                 onCancelButtonClicked = {
                     navigateUp(navController)
                 },
-                databaseObject = { /* TODO: Database Object Passed Here */}
+                //databaseObject = { /* TODO: Database Object Passed Here */}
+                showDialog = remember { mutableStateOf(false) }
             )
         }
     }

@@ -14,6 +14,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -22,17 +23,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
+fun ParentScreen() {
+    val showDialog = remember { mutableStateOf(false) }
+    PersonalSpendsScreen(showDialog = showDialog)
+    AddCategories(Modifier, showDialog = showDialog)
+}
+
+@Composable
 fun AddCategories(
     modifier: Modifier,
+    showDialog: MutableState<Boolean>,
     onConfirmButtonClicked: () -> Unit = {},
     onCancelButtonClicked: () -> Unit = {},
-    databaseObject: Any
+    //databaseObject: Any
 ) {
     val name = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
     val amount = remember { mutableStateOf("") }
     val defaultPadding = 8.dp
     val id = remember { mutableStateOf("") }
+
 
     Column(modifier = Modifier.padding(defaultPadding)) {
         Row(
@@ -64,7 +74,7 @@ fun AddCategories(
                 Text("Cloth")
             }
             Button(modifier = Modifier.height(50.dp),
-                onClick = { /* onclick */ }) {
+                onClick = {showDialog.value = true}) {
                 Text("Add+")
             }
         }
@@ -145,6 +155,7 @@ fun AddScreenPreview()
 {
     AddCategories(
         modifier = Modifier,
-        databaseObject = Unit
+        //databaseObject = Unit,
+        showDialog = remember { mutableStateOf(false) }
     )
 }

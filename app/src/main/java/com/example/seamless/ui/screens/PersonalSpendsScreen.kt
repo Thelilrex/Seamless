@@ -30,6 +30,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -48,11 +49,12 @@ import kotlin.math.exp
 
 @Composable
 fun PersonalSpendsScreen(
+    showDialog: MutableState<Boolean>,
     dataToList: () -> Unit = {},
     onDeleteButtonClicked: () -> Unit = {},
     onDialogueConfirmButtonClicked: () -> Unit = {},
     onAddButtonClicked:() -> Unit = {},
-    databaseObject: Any,
+    //databaseObject: Any,
     expenseToList: () -> Unit = {}, // do this 2nd // do the screen(add)
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
@@ -62,8 +64,6 @@ fun PersonalSpendsScreen(
     val expenseItem = remember { mutableListOf<Expenses>()}
 
     val expenses: Expenses = Expenses(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
-
-    val showDialog = remember { mutableStateOf(false) }
 
     var setNumber by remember { mutableStateOf(1) }
     var categories by remember { mutableStateOf(1) }
@@ -307,6 +307,7 @@ fun SpendItemsLayout(expenses: List<Expenses>) {
 fun PersonalSpendsScreenPreview()
 {
     PersonalSpendsScreen(
-        databaseObject = {}
+        //databaseObject = {}
+        showDialog = remember { mutableStateOf(false) }
     )
 }

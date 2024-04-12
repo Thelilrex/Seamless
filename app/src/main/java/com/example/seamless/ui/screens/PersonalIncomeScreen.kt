@@ -144,9 +144,9 @@ fun PersonalIncomesScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Button(
-                        onClick = {showDialog.value = true
+                        onClick = {}, // Shows the dialog
 //                            onAddButtonClicked()
-                                  },
+
                         modifier = Modifier
                             .weight(1f)
                             .height(70.dp)
