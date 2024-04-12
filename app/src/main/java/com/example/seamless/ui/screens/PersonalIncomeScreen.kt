@@ -125,7 +125,7 @@ fun PersonalIncomesScreen(
                     Button(
                         onClick = {showDialog.value = true
                             //should go to add screen
-                            onAddButtonClicked()
+//                            onAddButtonClicked()
                                   },
                         modifier = Modifier
                             .weight(1f)
