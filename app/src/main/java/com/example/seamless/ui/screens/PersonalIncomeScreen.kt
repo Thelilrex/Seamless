@@ -42,6 +42,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.example.seamless.database.Expenses
+import com.example.seamless.database.Income
 
 @Composable
 fun PersonalIncomesScreen(
@@ -49,7 +51,9 @@ fun PersonalIncomesScreen(
     onDeleteButtonClicked: () -> Unit = {},
     onDialogueConfirmButtonClicked: () -> Unit = {},
     onAddButtonClicked:() -> Unit = {},
-    databaseObject: Any
+    databaseObject: Any,
+    incomeToList: () -> Unit = {}, // finish this first
+    expenseToList: () -> Unit = {}, // do this 2nd // do the screen(add)
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
     val browseItem = remember { mutableListOf<BrowseItem>(
@@ -60,6 +64,11 @@ fun PersonalIncomesScreen(
 //        BrowseItem(5, "Cloth", "Cat5", "Shirts", 514.0),
 //        BrowseItem(6, "Rent", "Cat6", "House", 2.0),
     ) }
+    val incomeItem = remember { mutableListOf<Income>()}
+    val expenseItem = remember { mutableListOf<Expenses>()}
+
+    val income: Income = Income(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
+
     val showDialog = remember { mutableStateOf(false) }
     val buttonDouble1 = remember { mutableStateOf(0.0) }
 
@@ -105,19 +114,20 @@ fun PersonalIncomesScreen(
             Column(modifier = Modifier.weight(0.8f)) {
                 Row(modifier = Modifier.padding(16.dp)) {
                     PersonalIncomesPieChart(
-                        browseItems = browseItem,
+//                        browseItems = browseItem,
+                        income = incomeItem,
                         colors = pieChartColors,
                         modifier = Modifier
                     )
                 }
                 Row(modifier = Modifier.padding(16.dp)) {
                     PersonalIncomeLegend(
-                        browseItems = browseItem,
+                        income = incomeItem,
                         colors = pieChartColors,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
-                BrowseItemsLayout(browseItem)
+                BrowseItemsLayout(incomeItem)
             }
             Column(modifier = Modifier.weight(0.1f)) {
                 Spacer(modifier = Modifier.weight(1f))
@@ -193,8 +203,11 @@ fun PersonalIncomesScreen(
                 ) {
                     Button(
                         onClick = {
-                            browseItem.add(BrowseItem(setNumber, nameState.value, "Cat" + categories.toString(),
-                                descriptionState.value, amountState.value.toDouble()))
+//                            incomeItem.add(Income(setNumber, nameState.value, "Cat" + categories.toString(),
+//                                descriptionState.value, amountState.value.toDouble()))
+                            incomeItem.add(Income(name = nameState.value, description = descriptionState.value,
+                                amount = amountState.value.toDouble(), categoryID = categories))
+                            //name = "Name1", description = "Description1", amount = 150.0, categoryID = 1
                             showDialog.value = false
                             setNumber++
                             categories++
@@ -221,7 +234,7 @@ fun PersonalIncomesScreen(
 
 @Composable
 fun PersonalIncomesPieChart(
-    browseItems: List<BrowseItem>,
+    income: List<Income>,
     colors: List<Color>,
     modifier: Modifier = Modifier
 ) {
@@ -231,9 +244,9 @@ fun PersonalIncomesPieChart(
             .aspectRatio(1f)
     ) {
         Canvas(modifier = Modifier.fillMaxSize()) {
-            val total = browseItems.sumOf {it.amount}
+            val total = income.sumOf {it.amount}
             var startAngle = 0f
-            browseItems.forEachIndexed { index, item ->
+            income.forEachIndexed { index, item ->
                 val angle = (item.amount.toFloat() / total) * 360f
                 val color = colors.getOrElse(index) { Color.Black }
                 drawArc(
@@ -251,9 +264,11 @@ fun PersonalIncomesPieChart(
 }
 
 @Composable
-fun PersonalIncomeLegend(browseItems: List<BrowseItem>, colors: List<Color>, modifier: Modifier = Modifier) {
+fun PersonalIncomeLegend(income: List<Income>, colors: List<Color>, modifier: Modifier = Modifier) {
+//    fun PersonalIncomeLegend(browseItems: List<BrowseItem>, colors: List<Color>, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
-        browseItems.forEachIndexed { index, item ->
+        income.forEachIndexed { index, item ->
+//            browseItems.forEachIndexed { index, item ->
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier = Modifier
@@ -271,7 +286,8 @@ fun PersonalIncomeLegend(browseItems: List<BrowseItem>, colors: List<Color>, mod
 }
 
 @Composable
-fun BrowseItemsLayout(browseItems: List<BrowseItem>) {
+fun BrowseItemsLayout(income: List<Income>) {
+//    fun BrowseItemsLayout(browseItems: List<BrowseItem>) {
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -296,7 +312,7 @@ fun BrowseItemsLayout(browseItems: List<BrowseItem>) {
         }
     }
     LazyColumn{
-        items(browseItems) { item ->
+        items(income) { item ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -304,8 +320,8 @@ fun BrowseItemsLayout(browseItems: List<BrowseItem>) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(text = item.name, modifier = Modifier.weight(1f))
-                Text(text = item.categories, modifier = Modifier.weight(1f))
-                Text(text = item.description, modifier = Modifier.weight(1f))
+                Text(text = item.categoryID.toString(), modifier = Modifier.weight(1f))
+                Text(text = item.description.toString(), modifier = Modifier.weight(1f))
                 Text(text = "$${item.amount}", modifier = Modifier.weight(1f))
             }
         }

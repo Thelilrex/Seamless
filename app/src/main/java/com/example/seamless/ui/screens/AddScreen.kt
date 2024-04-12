@@ -28,7 +28,6 @@ fun AddCategories(
     onCancelButtonClicked: () -> Unit = {},
     databaseObject: Any
 ) {
-
     val name = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
     val amount = remember { mutableStateOf("") }

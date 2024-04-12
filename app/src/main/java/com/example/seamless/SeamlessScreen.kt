@@ -10,6 +10,7 @@ import com.example.seamless.ui.screens.AddCategories
 import com.example.seamless.ui.screens.BusinessScreen
 import com.example.seamless.ui.screens.PersonalIncomesScreen
 import com.example.seamless.ui.screens.PersonalScreen
+import com.example.seamless.ui.screens.PersonalSpendsScreen
 import com.example.seamless.ui.screens.StartScreen
 
 enum class SeamlessScreen {
@@ -75,6 +76,8 @@ fun SeamlessApp(
         composable(route = SeamlessScreen.PersonalIncome.name){
             PersonalIncomesScreen(
                 dataToList = {/*TODO: Define function to take in DAO and return list of all personal Income items*/},
+                incomeToList = {/*TODO: Get the IncomeItems, them check if it is empty, if it is empty, use expenseToList */},
+                expenseToList = {/*TODO: Get the ExpenseItems*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Income*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Personal Income*/},
                 onAddButtonClicked = {navController.navigate(SeamlessScreen.PersonalAdd.name)},
@@ -83,7 +86,7 @@ fun SeamlessApp(
         }
 
         composable(route = SeamlessScreen.PersonalExpenses.name){
-            PersonalIncomesScreen(
+            PersonalSpendsScreen(
                 dataToList = {/*TODO: Define function to take in DAO and return list of all personal expense items*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Expenses*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Personal Expenses*/},
@@ -101,7 +104,7 @@ fun SeamlessApp(
         }
 
         composable(route = SeamlessScreen.BusinessExpenses.name){
-            PersonalIncomesScreen(
+            PersonalSpendsScreen(
                 dataToList = {/*TODO: Define function to take in DAO and return list of all business expense items*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Business Expense*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Business Expense*/},
