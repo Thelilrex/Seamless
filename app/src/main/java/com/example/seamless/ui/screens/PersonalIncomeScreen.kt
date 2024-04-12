@@ -124,7 +124,6 @@ fun PersonalIncomesScreen(
                 ) {
                     Button(
                         onClick = {showDialog.value = true
-                            //should go to add screen
 //                            onAddButtonClicked()
                                   },
                         modifier = Modifier
@@ -181,13 +180,26 @@ fun PersonalIncomesScreen(
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
-
-                Button(
-                    onClick = {
-                        onDialogueConfirmButtonClicked()
-                    }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text("Confirm")
+                    Button(
+                        onClick = {
+                            onDialogueConfirmButtonClicked()
+                        }
+                    ) {
+                        Text("Confirm")
+                    }
+                    Button(
+                        onClick = {
+                            onAddButtonClicked()
+                        }
+                    ) {
+                        Text("Add Screen")
+                    }
                 }
             }
         }
