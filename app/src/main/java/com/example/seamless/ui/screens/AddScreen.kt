@@ -45,23 +45,23 @@ fun AddCategories(
 
             Button(modifier = Modifier.height(50.dp),
                 onClick = {id.value = "1"}) {
-                Text("Spend1")
+                Text("Food")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {id.value = "2"}) {
-                Text("Spend2")
+                Text("Entertainments")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {id.value = "3"}) {
-                Text("Spend3")
+                Text("Rent")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {id.value = "4"}) {
-                Text("Spend4")
+                Text("Transport")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {id.value = "5"}) {
-                Text("Spend5")
+                Text("Cloth")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = { /* onclick */ }) {

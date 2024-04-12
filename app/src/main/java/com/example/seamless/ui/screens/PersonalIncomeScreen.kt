@@ -52,8 +52,14 @@ fun PersonalIncomesScreen(
     onDialogueConfirmButtonClicked: () -> Unit = {},
     onAddButtonClicked:() -> Unit = {},
     databaseObject: Any,
-    incomeToList: () -> Unit = {}, // finish this first
-    expenseToList: () -> Unit = {}, // do this 2nd // do the screen(add)
+    incomeToList: () -> Unit = {},
+    expenseToList: () -> Unit = {},
+    // add the navigation for the personal / Business SpendsScreen
+    // navigate add+ button to the dialog,
+    // and then navigate add button to add-screen
+    // change the background of the dialog
+    // the buttons or drop down menu
+    // lock text field until they select one categories button (food.etc)
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
     val browseItem = remember { mutableListOf<BrowseItem>(
@@ -320,7 +326,18 @@ fun BrowseItemsLayout(income: List<Income>) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(text = item.name, modifier = Modifier.weight(1f))
-                Text(text = item.categoryID.toString(), modifier = Modifier.weight(1f))
+                val text = when (item.categoryID) {
+                    1 -> "Food"
+                    2 -> "Entertainments"
+                    3 -> "Rent"
+                    4 -> "Transport"
+                    5 -> "Cloth"
+                    else -> "Else"
+                }
+                Text(
+                    text = text,
+                    modifier = Modifier.weight(1f)
+                )
                 Text(text = item.description.toString(), modifier = Modifier.weight(1f))
                 Text(text = "$${item.amount}", modifier = Modifier.weight(1f))
             }
