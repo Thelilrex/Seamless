@@ -43,7 +43,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.example.seamless.database.AppDatabase
 import com.example.seamless.database.Income
+import kotlinx.coroutines.runBlocking
 
 @Composable
 fun PersonalIncomesScreen(
@@ -70,6 +72,7 @@ fun PersonalIncomesScreen(
 
     var setNumber by remember { mutableStateOf(1) }
     var categories by remember { mutableStateOf(1) }
+    val idState = remember { mutableStateOf("") }
 
     val pieChartData = listOf(
         incomeValue1.value.toFloatOrNull() ?: 0f,
@@ -154,11 +157,10 @@ fun PersonalIncomesScreen(
                 Column(modifier = Modifier
                     .padding(16.dp)
                     .background(Color.White)) {
-                    val IdState = remember { mutableStateOf("") }
                     Text(text = "Enter an ID：")
                     OutlinedTextField(
-                        value = IdState.value,
-                        onValueChange = { IdState.value = it},
+                        value = idState.value,
+                        onValueChange = { idState.value = it},
                         label = { Text("ID") },
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -171,6 +173,8 @@ fun PersonalIncomesScreen(
                     ) {
                         Button(
                             onClick = {
+                                val dao = AppDatabase.getDatabase(context).appDao()
+                                runBlocking { dao.deleteIncomeById(idState.value.toInt())}
                                 showDeleteDialog.value = false
                             }
                         ) {

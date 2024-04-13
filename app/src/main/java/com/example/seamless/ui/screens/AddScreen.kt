@@ -93,6 +93,7 @@ fun AddCategories(
                     id.value = "5"
                     showAddDialog.value = true
                 }) {
+                runBlocking {  }
                 Text("Cloth")
             }
             Button(modifier = Modifier.height(50.dp),
@@ -161,7 +162,7 @@ fun AddCategories(
                                         name = nameState.value,
                                         description = descriptionState.value,
                                         amount = amountState.value.toDouble(),
-                                        categoryID = categories
+                                        categoryID = 1
                                     )
                                     val dao = AppDatabase.getDatabase(context).appDao()
                                     runBlocking { dao.insertIncome(income) }
