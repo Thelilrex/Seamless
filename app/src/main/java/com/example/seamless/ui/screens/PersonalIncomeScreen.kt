@@ -54,13 +54,9 @@ fun PersonalIncomesScreen(
     databaseObject: Any,
     incomeToList: () -> Unit = {},
     expenseToList: () -> Unit = {},
-    // Dialog for delete, take ID.
     // add the navigation for the personal / Business SpendsScreen
-    // navigate add+ button to the dialog,
     // and then navigate add button to add-screen
-    // change the background of the dialog
     // the buttons or drop down menu
-    // lock text field until they select one categories button (food.etc)
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
 //    val browseItem = remember { mutableListOf<BrowseItem>(

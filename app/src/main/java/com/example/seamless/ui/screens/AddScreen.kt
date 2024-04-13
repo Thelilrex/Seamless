@@ -1,5 +1,6 @@
 package com.example.seamless.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -161,7 +163,7 @@ fun AddCategories(
             }
             if (showDialog.value) {
                 Dialog(onDismissRequest = { showDialog.value = false }) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.padding(16.dp).background(Color.White)) {
                         val nameState = remember { mutableStateOf("") }
                         val amountState = remember { mutableStateOf("") }
                         val descriptionState = remember { mutableStateOf("") }
