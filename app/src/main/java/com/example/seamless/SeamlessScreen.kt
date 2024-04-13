@@ -112,6 +112,7 @@ fun SeamlessApp(
                 dataToList = {/*TODO: Define function to take in DAO and return list of all business expense items*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Business Expense*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Business Expense*/},
+
                 //databaseObject = { /* TODO: Database Object Passed Here */},
             )
         }
@@ -124,7 +125,7 @@ fun SeamlessApp(
                     /* TODO: Implement Add Business Income/Expense*/
                 },
                 onCancelButtonClicked = {
-                    navigateUp(navController)
+                    navController.navigate(SeamlessScreen.PersonalIncome.name)
                 },
                 //databaseObject = { /* TODO: Database Object Passed Here */}
                 showDialog = remember { mutableStateOf(false) }

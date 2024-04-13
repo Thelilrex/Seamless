@@ -98,46 +98,6 @@ fun AddCategories(
                 Text("Add+")
             }
         }
-//        Row(
-//            modifier = Modifier
-//                .padding(16.dp)
-//                .height(70.dp),
-//            horizontalArrangement = Arrangement.spacedBy(8.dp)
-//        ) {
-//            OutlinedTextField(
-//                value = name.value,
-//                onValueChange = { name.value = it },
-//                label = { Text("Name") },
-//                modifier = Modifier.fillMaxWidth()
-//            )
-//        }
-//        Row(
-//            modifier = Modifier
-//                .padding(16.dp)
-//                .height(70.dp),
-//            horizontalArrangement = Arrangement.spacedBy(8.dp)
-//        ) {
-//            OutlinedTextField(
-//                value = description.value,
-//                onValueChange = { description.value = it },
-//                label = { Text("Description") },
-//                modifier = Modifier.fillMaxWidth()
-//            )
-//        }
-//        Row(
-//            modifier = Modifier
-//                .padding(16.dp)
-//                .height(70.dp),
-//            horizontalArrangement = Arrangement.spacedBy(8.dp)
-//        ) {
-//            OutlinedTextField(
-//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-//                value = amount.value,
-//                onValueChange = { amount.value = it },
-//                label = { Text("Amount") },
-//                modifier = Modifier.fillMaxWidth()
-//            )
-//        }
 
         Row(
             modifier = Modifier
@@ -196,8 +156,6 @@ fun AddCategories(
                         ) {
                             Button(
                                 onClick = {
-//                            incomeItem.add(Income(setNumber, nameState.value, "Cat" + categories.toString(),
-//                                descriptionState.value, amountState.value.toDouble()))
                                     incomeItem.add(
                                         Income(
                                             name = nameState.value,
@@ -206,36 +164,18 @@ fun AddCategories(
                                             categoryID = categories
                                         )
                                     )
-                                    //name = "Name1", description = "Description1", amount = 150.0, categoryID = 1
                                     showAddDialog.value = false
                                     setNumber++
                                     categories++
                                     onDialogueConfirmButtonClicked()
-
                                     /*TODO: Storage to database*/
                                 }
                             ) {
                                 Text("Confirm")
                             }
-//                            Button(
-//                                onClick = {
-//                                }
-//                            ) {
-//                                Text("Add Screen")
-//                            }
                         }
                     }
                 }
-//            Button(
-//                modifier = Modifier
-//                    .weight(1f)
-//                    .fillMaxHeight(),
-//                onClick = {
-//                    onConfirmButtonClicked()
-//                }
-//            ) {
-//                Text("Confirm")
-//            }
             }
         }
     }
