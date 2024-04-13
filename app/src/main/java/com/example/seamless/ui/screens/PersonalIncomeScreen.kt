@@ -1,5 +1,6 @@
 package com.example.seamless.ui.screens
 
+import android.content.Context
 import androidx.compose.foundation.Canvas
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -47,15 +48,15 @@ import com.example.seamless.database.Income
 
 @Composable
 fun PersonalIncomesScreen(
-    dataToList: () -> Unit = {},
     onDeleteButtonClicked: () -> Unit = {},
     onDialogueConfirmButtonClicked: () -> Unit = {},
     onAddButtonClicked:() -> Unit = {},
-    databaseObject: Any,
     incomeToList: () -> Unit = {},
-    expenseToList: () -> Unit = {},
+    context: Context
 ) {
-    /*TODO: Call dataToList to turn database object into list then set browseItem*/
+    val incomeItem = remember { mutableListOf<Income>()}
+
+    val income: Income = Income(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
 
     val incomeItem = remember { mutableListOf<Income>()}
     val showDeleteDialog = remember { mutableStateOf(false) }
@@ -155,7 +156,7 @@ fun PersonalIncomesScreen(
                                 showDeleteDialog.value = false
                             }
                         ) {
-                            Text("Cofirm")
+                            Text("Confirm")
                         }
                     }
                 }
@@ -268,11 +269,11 @@ fun BrowseItemsLayout(income: List<Income>) {
     }
 }
 
-@Composable
-@Preview(backgroundColor = 0xFFFFFFFF)
-fun PersonalIncomesScreenPreview()
-{
-    PersonalIncomesScreen(
-        databaseObject = {}
-    )
-}
+//@Composable
+//@Preview(backgroundColor = 0xFFFFFFFF)
+//fun PersonalIncomesScreenPreview()
+//{
+//    PersonalIncomesScreen(
+//        databaseObject = {}
+//    )
+//}

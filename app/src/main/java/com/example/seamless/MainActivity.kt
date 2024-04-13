@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SeamlessApp()
+                    SeamlessApp(applicationContext)
                     //val dao = AppDatabase.getDatabase(applicationContext).appDao()
                     // As of now we need to pass this dao to implement the databases
                 }
@@ -139,9 +139,9 @@ fun FunctionCard(function: Function, modifier: Modifier = Modifier)
     }
 }
 
-@Composable
-@Preview
-fun FunctionCardPreview()
-{
-    SeamlessApp()
-}
+//@Composable
+//@Preview
+//fun FunctionCardPreview()
+//{
+//    SeamlessApp()
+//}

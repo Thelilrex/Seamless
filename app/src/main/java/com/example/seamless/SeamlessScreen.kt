@@ -1,5 +1,6 @@
 package com.example.seamless
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -8,6 +9,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.seamless.database.AppDatabase
+import com.example.seamless.database.Expenses
+import com.example.seamless.database.Income
 import com.example.seamless.ui.screens.AddCategories
 import com.example.seamless.ui.screens.AddExpenseCategories
 import com.example.seamless.ui.screens.BusinessScreen
@@ -15,6 +19,11 @@ import com.example.seamless.ui.screens.PersonalIncomesScreen
 import com.example.seamless.ui.screens.PersonalScreen
 import com.example.seamless.ui.screens.PersonalSpendsScreen
 import com.example.seamless.ui.screens.StartScreen
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.runBlocking
 
 enum class SeamlessScreen {
     Start,
@@ -30,7 +39,7 @@ enum class SeamlessScreen {
 }
 
 @Composable
-fun SeamlessApp(
+fun SeamlessApp(context: Context
 ){
     val navController = rememberNavController()
 
@@ -78,42 +87,40 @@ fun SeamlessApp(
 
         composable(route = SeamlessScreen.PersonalIncome.name){
             PersonalIncomesScreen(
-                dataToList = {/*TODO: Define function to take in DAO and return list of all personal Income items*/},
-                incomeToList = {/*TODO: Get the IncomeItems, them check if it is empty, if it is empty, use expenseToList */},
-                expenseToList = {/*TODO: Get the ExpenseItems*/},
+                incomeToList = {incomeFlowToList(context, currentScreen)},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Income*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Personal Income*/},
                 onAddButtonClicked = {navController.navigate(SeamlessScreen.PersonalAdd.name)},
-                databaseObject = { /* TODO: Database Object Passed Here */},
-            )
+                context = context
+                )
         }
 
         composable(route = SeamlessScreen.PersonalExpenses.name){
             PersonalSpendsScreen(
-                dataToList = {/*TODO: Define function to take in DAO and return list of all personal expense items*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Expenses*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Personal Expenses*/},
                 onAddExpenseButtonClicked = {navController.navigate(SeamlessScreen.PersonalExpenseAdd.name)},
-                //databaseObject = { /* TODO: Database Object Passed Here */},
+                context = context,
+                expenseToList = {expenseFlowToList(context, currentScreen)}
             )
         }
 
         composable(route = SeamlessScreen.BusinessIncome.name){
             PersonalIncomesScreen(
-                dataToList = {/*TODO: Define function to take in DAO and return list of all business income items*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Business Income*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Business Income*/},
-                databaseObject = { /* TODO: Database Object Passed Here */},
-            )
+                context = context,
+                incomeToList = {incomeFlowToList(context, currentScreen)}
+                )
         }
 
         composable(route = SeamlessScreen.BusinessExpenses.name){
             PersonalSpendsScreen(
-                dataToList = {/*TODO: Define function to take in DAO and return list of all business expense items*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Business Expense*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Business Expense*/},
 
-                //databaseObject = { /* TODO: Database Object Passed Here */},
+                context = context,
+                expenseToList = {expenseFlowToList(context, currentScreen)}
             )
         }
 
@@ -127,8 +134,8 @@ fun SeamlessApp(
                 onCancelButtonClicked = {
                     navController.navigate(SeamlessScreen.PersonalIncome.name)
                 },
-                //databaseObject = { /* TODO: Database Object Passed Here */}
-                showDialog = remember { mutableStateOf(false) }
+                showDialog = remember { mutableStateOf(false) },
+                context = context
             )
         }
 
@@ -141,8 +148,8 @@ fun SeamlessApp(
                 onCancelButtonClicked = {
                     navController.navigate(SeamlessScreen.PersonalIncome.name)
                 },
-                //databaseObject = { /* TODO: Database Object Passed Here */}
-                showDialog = remember { mutableStateOf(false) }
+                showDialog = remember { mutableStateOf(false) },
+                context = context
             )
         }
 
@@ -155,8 +162,8 @@ fun SeamlessApp(
                 onCancelButtonClicked = {
                     navController.navigate(SeamlessScreen.PersonalExpenses.name)
                 },
-                //databaseObject = { /* TODO: Database Object Passed Here */}
-                showDialog = remember { mutableStateOf(false) }
+                showDialog = remember { mutableStateOf(false) },
+                context = context
             )
         }
     }
@@ -172,4 +179,28 @@ private fun navigateUp(
     navController: NavHostController
 ){
     /* TODO: implement back navigation */
+}
+
+private fun incomeFlowToList(context: Context, typeID: Int): List<Income>
+{
+    val dao = AppDatabase.getDatabase(context).appDao()
+    val flowIncome: Flow<List<Income>>
+    runBlocking {flowIncome = dao.getIncomeByType(typeID)}
+    return runBlocking {
+        flowIncome
+            .flatMapConcat { it.asFlow() }
+            .toList()
+    }
+}
+
+private fun expenseFlowToList(context: Context, typeID: Int): List<Expenses>
+{
+    val dao = AppDatabase.getDatabase(context).appDao()
+    val flowExpense: Flow<List<Expenses>>
+    runBlocking {flowExpense = dao.getExpensesByType(typeID)}
+    return runBlocking {
+        flowExpense
+            .flatMapConcat { it.asFlow() }
+            .toList()
+    }
 }
