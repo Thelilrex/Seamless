@@ -58,10 +58,10 @@ fun PersonalSpendsScreen(
     expenseToList: () -> Unit = {}, // do this 2nd // do the screen(add)
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
-    val browseItem = remember { mutableListOf<BrowseItem>(
-    ) }
+//    val browseItem = remember { mutableListOf<BrowseItem>() }
 
     val expenseItem = remember { mutableListOf<Expenses>()}
+    val showDeleteDialog = remember { mutableStateOf(false) }
 
     val expenses: Expenses = Expenses(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
 
@@ -201,6 +201,37 @@ fun PersonalSpendsScreen(
                         }
                     ) {
                         Text("Add Screen")
+                    }
+                }
+            }
+        }
+        if (showDeleteDialog.value) {
+            Dialog(onDismissRequest = { showDeleteDialog.value = false }) {
+                Column(modifier = Modifier
+                    .padding(16.dp)
+                    .background(Color.White)) {
+                    val IdState = remember { mutableStateOf("") }
+                    Text(text = "Enter an ID：")
+                    OutlinedTextField(
+                        value = IdState.value,
+                        onValueChange = { IdState.value = it},
+                        label = { Text("ID") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(10.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Button(
+                            onClick = {
+                                showDeleteDialog.value = false
+                            }
+                        ) {
+                            Text("Cofirm")
+                        }
                     }
                 }
             }
