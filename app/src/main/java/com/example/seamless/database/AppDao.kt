@@ -59,9 +59,8 @@ interface AppDao{
     suspend fun insertType(type: Type) // Used by us to insert the personal and the business types
 
     @Insert
-    suspend fun insertPersonalCategory(category: Category) // Used by the user to add a personal category
-    @Insert
-    suspend fun insertBusinessCategory(category: Category) // Used by the user to add a business category
+    suspend fun insertCategory(category: Category) // Used by the user to add a category
+
     @Insert
     suspend fun insertIncome(income: Income) // Used by user to input the transaction
 
