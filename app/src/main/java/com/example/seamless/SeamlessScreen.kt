@@ -4,12 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.seamless.database.AppDatabase
 import com.example.seamless.ui.screens.AddCategories
 import com.example.seamless.ui.screens.AddExpenseCategories
 import com.example.seamless.ui.screens.BusinessScreen
@@ -35,8 +33,6 @@ enum class SeamlessScreen {
 fun SeamlessApp(
 ){
     val navController = rememberNavController()
-    val context = LocalContext.current
-    val appDatabase = remember { AppDatabase.getDatabase(context) }
 
     NavHost(navController = navController, startDestination = SeamlessScreen.Start.name) {
         composable(route = SeamlessScreen.Start.name) {
@@ -81,8 +77,6 @@ fun SeamlessApp(
         }
 
         composable(route = SeamlessScreen.PersonalIncome.name){
-
-
             PersonalIncomesScreen(
                 dataToList = {/*TODO: Define function to take in DAO and return list of all personal Income items*/},
                 incomeToList = {/*TODO: Get the IncomeItems, them check if it is empty, if it is empty, use expenseToList */},
@@ -90,8 +84,7 @@ fun SeamlessApp(
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Income*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Personal Income*/},
                 onAddButtonClicked = {navController.navigate(SeamlessScreen.PersonalAdd.name)},
-                appDatabase = appDatabase
-                //databaseObject = { /* TODO: Database Object Passed Here */},
+                databaseObject = { /* TODO: Database Object Passed Here */},
             )
         }
 
@@ -110,8 +103,7 @@ fun SeamlessApp(
                 dataToList = {/*TODO: Define function to take in DAO and return list of all business income items*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Business Income*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Business Income*/},
-                appDatabase = appDatabase
-                //databaseObject = { /* TODO: Database Object Passed Here */},
+                databaseObject = { /* TODO: Database Object Passed Here */},
             )
         }
 
