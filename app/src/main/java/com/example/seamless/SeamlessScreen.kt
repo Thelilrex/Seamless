@@ -145,7 +145,7 @@ fun SeamlessApp(context: Context
                     /* TODO: Implement Add Business Income/Expense*/
                 },
                 onCancelButtonClicked = {
-                    navigateUp(navController)
+                    navController.navigate(SeamlessScreen.PersonalIncome.name)
                 },
                 showDialog = remember { mutableStateOf(false) },
                 context = context
@@ -159,7 +159,7 @@ fun SeamlessApp(context: Context
                     /* TODO: Implement Add Personal Expense*/
                 },
                 onCancelButtonClicked = {
-                    navigateUp(navController)
+                    navController.navigate(SeamlessScreen.PersonalExpenses.name)
                 },
                 showDialog = remember { mutableStateOf(false) },
                 context = context
