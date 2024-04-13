@@ -59,41 +59,40 @@ fun AddCategories(
                 .height(50.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "1"
                     showAddDialog.value = true
                 }) {
-                Text("Food")
+                Text("Part Time")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "2"
                     showAddDialog.value = true
                 }) {
-                Text("Entertainments")
+                Text("Job")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "3"
                     showAddDialog.value = true
                 }) {
-                Text("Rent")
+                Text("Parents")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "4"
                     showAddDialog.value = true
                 }) {
-                Text("Transport")
+                Text("Bonus")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "5"
                     showAddDialog.value = true
                 }) {
-                Text("Cloth")
+                Text("Gifts")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = { showAddDialog.value = true }) {
