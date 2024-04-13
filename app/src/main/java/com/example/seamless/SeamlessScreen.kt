@@ -118,6 +118,7 @@ fun SeamlessApp(context: Context
             PersonalSpendsScreen(
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Business Expense*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Business Expense*/},
+
                 context = context,
                 expenseToList = {expenseFlowToList(context, currentScreen)}
             )
@@ -131,7 +132,7 @@ fun SeamlessApp(context: Context
                     /* TODO: Implement Add Business Income/Expense*/
                 },
                 onCancelButtonClicked = {
-                    navigateUp(navController)
+                    navController.navigate(SeamlessScreen.PersonalIncome.name)
                 },
                 showDialog = remember { mutableStateOf(false) },
                 context = context
