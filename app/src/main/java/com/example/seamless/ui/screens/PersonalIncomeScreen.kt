@@ -52,7 +52,8 @@ fun PersonalIncomesScreen(
     onDialogueConfirmButtonClicked: () -> Unit = {},
     onAddButtonClicked:() -> Unit = {},
     incomeToList: () -> Unit = {},
-    context: Context
+    incomeItem: MutableList<Income>,
+    context: Context,
 ) {
     val incomeItem = remember { mutableListOf<Income>()}
     val income: Income = Income(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
