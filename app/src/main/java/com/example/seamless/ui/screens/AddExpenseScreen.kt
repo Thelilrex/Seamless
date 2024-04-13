@@ -1,5 +1,6 @@
 package com.example.seamless.ui.screens
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,8 +28,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.example.seamless.database.AppDatabase
 import com.example.seamless.database.Expenses
 import com.example.seamless.database.Income
+import kotlinx.coroutines.runBlocking
 
 @Composable
 fun AddExpenseCategories(
@@ -37,6 +40,7 @@ fun AddExpenseCategories(
     onConfirmButtonClicked: () -> Unit = {},
     onCancelButtonClicked: () -> Unit = {},
     onDialogueConfirmButtonClicked: () -> Unit = {},
+    context: Context
 ) {
     val showDialog = remember { mutableStateOf(false) }
     val name = remember { mutableStateOf("") }
@@ -44,7 +48,6 @@ fun AddExpenseCategories(
     val amount = remember { mutableStateOf("") }
     val defaultPadding = 8.dp
     val id = remember { mutableStateOf("") }
-    val expenseItem = remember { mutableListOf<Expenses>()}
     var setNumber by remember { mutableStateOf(1) }
     var categories by remember { mutableStateOf(1) }
 
@@ -155,19 +158,18 @@ fun AddExpenseCategories(
                         ) {
                             Button(
                                 onClick = {
-                                    expenseItem.add(
-                                        Expenses(
-                                            name = nameState.value,
-                                            description = descriptionState.value,
-                                            amount = amountState.value.toDouble(),
-                                            categoryID = categories
-                                        )
+                                    val expense =Expenses(
+                                        name = nameState.value,
+                                        description = descriptionState.value,
+                                        amount = amountState.value.toDouble(),
+                                        categoryID = categories
                                     )
+                                    val dao = AppDatabase.getDatabase(context).appDao()
+                                    runBlocking {dao.insertExpenses(expense)}
                                     showDialog.value = false
                                     setNumber++
                                     categories++
                                     onDialogueConfirmButtonClicked()
-                                    /*TODO: Storage to database*/
                                 }
                             ) {
                                 Text("Confirm")
@@ -180,13 +182,13 @@ fun AddExpenseCategories(
     }
 }
 
-@Composable
-@Preview
-fun AddExpenseScreenPreview()
-{
-    AddExpenseCategories(
-        modifier = Modifier,
-        //databaseObject = Unit,
-        showDialog = remember { mutableStateOf(false) }
-    )
-}
+//@Composable
+//@Preview
+//fun AddExpenseScreenPreview()
+//{
+//    AddExpenseCategories(
+//        modifier = Modifier,
+//        //databaseObject = Unit,
+//        showDialog = remember { mutableStateOf(false) }
+//    )
+//}

@@ -1,5 +1,6 @@
 package com.example.seamless.ui.screens
 
+import android.content.Context
 import androidx.compose.foundation.Canvas
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -49,12 +50,11 @@ import kotlin.math.exp
 
 @Composable
 fun PersonalSpendsScreen(
-    dataToList: () -> Unit = {},
     onDeleteButtonClicked: () -> Unit = {},
     onDialogueConfirmButtonClicked: () -> Unit = {},
     onAddExpenseButtonClicked:() -> Unit = {},
-    //databaseObject: Any,
     expenseToList: () -> Unit = {}, // do this 2nd // do the screen(add)
+    context: Context
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
 //    val browseItem = remember { mutableListOf<BrowseItem>() }
@@ -168,7 +168,7 @@ fun PersonalSpendsScreen(
                             showDeleteDialog.value = false
                         }
                     ) {
-                        Text("Cofirm")
+                        Text("Confirm")
                     }
                 }
             }
@@ -270,9 +270,9 @@ fun SpendItemsLayout(expenses: List<Expenses>) {
     }
 }
 
-@Composable
-@Preview(backgroundColor = 0xFFFFFFFF)
-fun PersonalSpendsScreenPreview()
-{
-    PersonalSpendsScreen()
-}
+//@Composable
+//@Preview(backgroundColor = 0xFFFFFFFF)
+//fun PersonalSpendsScreenPreview()
+//{
+//    PersonalSpendsScreen()
+//}

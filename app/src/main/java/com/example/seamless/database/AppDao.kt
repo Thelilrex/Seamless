@@ -27,6 +27,9 @@ interface AppDao{
     @Transaction
     @Query("Select * From Income Where categoryID=:id")
     fun getIncomeByCategory(id : Int): Flow<List<Income>> // Most used stuff
+    @Transaction
+    @Query("Select * From Income Inner Join Category On Income.categoryID = category.categoryID Where category.typeID=:iD")
+    fun getIncomeByType(iD: Int): Flow<List<Income>>
 
     @Transaction
     @Query("Select * From Expenses Order By date Desc")
@@ -34,6 +37,9 @@ interface AppDao{
     @Transaction
     @Query("Select * From Expenses Where categoryID=:id")
     fun getExpensesByCategory(id : Int): Flow<List<Expenses>> // Most used stuff
+    @Transaction
+    @Query("Select * From Expenses Inner Join Category On Expenses.categoryID = category.categoryID Where category.typeID=:iD")
+    fun getExpensesByType(iD: Int): Flow<List<Expenses>>
 
     @Transaction
     @Query("Select * From AcquisitionCategory Order By acquisitionCatID")
