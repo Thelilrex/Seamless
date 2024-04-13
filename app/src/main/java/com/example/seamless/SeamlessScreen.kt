@@ -138,7 +138,7 @@ fun SeamlessApp(
                     /* TODO: Implement Add Business Income/Expense*/
                 },
                 onCancelButtonClicked = {
-                    navigateUp(navController)
+                    navController.navigate(SeamlessScreen.PersonalIncome.name)
                 },
                 //databaseObject = { /* TODO: Database Object Passed Here */}
                 showDialog = remember { mutableStateOf(false) }
@@ -152,7 +152,7 @@ fun SeamlessApp(
                     /* TODO: Implement Add Personal Expense*/
                 },
                 onCancelButtonClicked = {
-                    navigateUp(navController)
+                    navController.navigate(SeamlessScreen.PersonalExpenses.name)
                 },
                 //databaseObject = { /* TODO: Database Object Passed Here */}
                 showDialog = remember { mutableStateOf(false) }
