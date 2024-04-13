@@ -49,21 +49,21 @@ import kotlin.math.exp
 
 @Composable
 fun PersonalSpendsScreen(
-    showDialog: MutableState<Boolean>,
     dataToList: () -> Unit = {},
     onDeleteButtonClicked: () -> Unit = {},
     onDialogueConfirmButtonClicked: () -> Unit = {},
-    onAddButtonClicked:() -> Unit = {},
+    onAddExpenseButtonClicked:() -> Unit = {},
     //databaseObject: Any,
     expenseToList: () -> Unit = {}, // do this 2nd // do the screen(add)
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
 //    val browseItem = remember { mutableListOf<BrowseItem>() }
 
-    val expenseItem = remember { mutableListOf<Expenses>()}
+    val expenseItem = remember { mutableListOf<Expenses>() }
     val showDeleteDialog = remember { mutableStateOf(false) }
 
-    val expenses: Expenses = Expenses(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
+    val expenses: Expenses =
+        Expenses(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
 
     var setNumber by remember { mutableStateOf(1) }
     var categories by remember { mutableStateOf(1) }
@@ -117,7 +117,8 @@ fun PersonalSpendsScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Button(
-                        onClick = {showDialog.value = true
+                        onClick = {
+                            onAddExpenseButtonClicked()
                         },
                         modifier = Modifier
                             .weight(1f)
@@ -140,38 +141,21 @@ fun PersonalSpendsScreen(
             }
         }
     }
-    if (showDialog.value) {
-        Dialog(onDismissRequest = { showDialog.value = false }) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                val nameState = remember { mutableStateOf("") }
-                val amountState = remember { mutableStateOf("") }
-                val descriptionState = remember { mutableStateOf("") }
-
-                Text(text = "Input Value：")
+    if (showDeleteDialog.value) {
+        Dialog(onDismissRequest = { showDeleteDialog.value = false }) {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .background(Color.White)
+            ) {
+                val IdState = remember { mutableStateOf("") }
+                Text(text = "Enter an ID：")
                 OutlinedTextField(
-                    value = nameState.value,
-                    onValueChange = { nameState.value = it },
-                    label = { Text("Name") },
+                    value = IdState.value,
+                    onValueChange = { IdState.value = it },
+                    label = { Text("ID") },
                     modifier = Modifier.fillMaxWidth()
                 )
-
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = amountState.value,
-                    onValueChange = { amountState.value = it },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-                    label = { Text("Amount") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = descriptionState.value,
-                    onValueChange = { descriptionState.value = it },
-                    label = { Text("Description") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
                     modifier = Modifier
@@ -181,57 +165,10 @@ fun PersonalSpendsScreen(
                 ) {
                     Button(
                         onClick = {
-                            expenseItem.add(
-                                Expenses(name = nameState.value, description = descriptionState.value,
-                                amount = amountState.value.toDouble(), categoryID = categories)
-                            )
-                            showDialog.value = false
-                            setNumber++
-                            categories++
-                            onDialogueConfirmButtonClicked()
-
-                            /*TODO: Storage to database*/
+                            showDeleteDialog.value = false
                         }
                     ) {
-                        Text("Confirm")
-                    }
-                    Button(
-                        onClick = {
-                            onAddButtonClicked()
-                        }
-                    ) {
-                        Text("Add Screen")
-                    }
-                }
-            }
-        }
-        if (showDeleteDialog.value) {
-            Dialog(onDismissRequest = { showDeleteDialog.value = false }) {
-                Column(modifier = Modifier
-                    .padding(16.dp)
-                    .background(Color.White)) {
-                    val IdState = remember { mutableStateOf("") }
-                    Text(text = "Enter an ID：")
-                    OutlinedTextField(
-                        value = IdState.value,
-                        onValueChange = { IdState.value = it},
-                        label = { Text("ID") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(10.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Button(
-                            onClick = {
-                                showDeleteDialog.value = false
-                            }
-                        ) {
-                            Text("Cofirm")
-                        }
+                        Text("Cofirm")
                     }
                 }
             }
@@ -337,8 +274,5 @@ fun SpendItemsLayout(expenses: List<Expenses>) {
 @Preview(backgroundColor = 0xFFFFFFFF)
 fun PersonalSpendsScreenPreview()
 {
-    PersonalSpendsScreen(
-        //databaseObject = {}
-        showDialog = remember { mutableStateOf(false) }
-    )
+    PersonalSpendsScreen()
 }
