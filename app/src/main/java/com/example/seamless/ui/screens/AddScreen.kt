@@ -176,7 +176,7 @@ fun AddCategories(
                         ) {
                             Button(
                                 onClick = {
-                                    val income = Income(
+                                    val income = Income( // let the user to input the data to income, and then put the income to a list of Income.
                                         name = nameState.value,
                                         description = descriptionState.value,
                                         amount = amountState.value.toDouble(),
