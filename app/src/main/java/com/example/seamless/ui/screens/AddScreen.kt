@@ -1,5 +1,6 @@
 package com.example.seamless.ui.screens
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,14 +26,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.example.seamless.database.AppDatabase
 import com.example.seamless.database.Income
-
-@Composable
-fun ParentScreen() {
-    val showDialog = remember { mutableStateOf(false) }
-    PersonalSpendsScreen(showDialog = showDialog)
-    AddCategories(Modifier, showDialog = showDialog)
-}
+import kotlinx.coroutines.runBlocking
 
 @Composable
 fun AddCategories(
@@ -41,14 +37,13 @@ fun AddCategories(
     onConfirmButtonClicked: () -> Unit = {},
     onCancelButtonClicked: () -> Unit = {},
     onDialogueConfirmButtonClicked: () -> Unit = {},
-    //databaseObject: Any
+    context: Context
 ) {
     val name = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
     val amount = remember { mutableStateOf("") }
     val defaultPadding = 8.dp
     val id = remember { mutableStateOf("") }
-    val incomeItem = remember { mutableListOf<Income>() }
     var setNumber by remember { mutableStateOf(1) }
     var categories by remember { mutableStateOf(1) }
 
@@ -101,47 +96,6 @@ fun AddCategories(
                 Text("Add+")
             }
         }
-//        Row(
-//            modifier = Modifier
-//                .padding(16.dp)
-//                .height(70.dp),
-//            horizontalArrangement = Arrangement.spacedBy(8.dp)
-//        ) {
-//            OutlinedTextField(
-//                value = name.value,
-//                onValueChange = { name.value = it },
-//                label = { Text("Name") },
-//                modifier = Modifier.fillMaxWidth()
-//            )
-//        }
-//        Row(
-//            modifier = Modifier
-//                .padding(16.dp)
-//                .height(70.dp),
-//            horizontalArrangement = Arrangement.spacedBy(8.dp)
-//        ) {
-//            OutlinedTextField(
-//                value = description.value,
-//                onValueChange = { description.value = it },
-//                label = { Text("Description") },
-//                modifier = Modifier.fillMaxWidth()
-//            )
-//        }
-//        Row(
-//            modifier = Modifier
-//                .padding(16.dp)
-//                .height(70.dp),
-//            horizontalArrangement = Arrangement.spacedBy(8.dp)
-//        ) {
-//            OutlinedTextField(
-//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-//                value = amount.value,
-//                onValueChange = { amount.value = it },
-//                label = { Text("Amount") },
-//                modifier = Modifier.fillMaxWidth()
-//            )
-//        }
-
         Row(
             modifier = Modifier
                 .padding(30.dp)
@@ -199,23 +153,18 @@ fun AddCategories(
                         ) {
                             Button(
                                 onClick = {
-//                            incomeItem.add(Income(setNumber, nameState.value, "Cat" + categories.toString(),
-//                                descriptionState.value, amountState.value.toDouble()))
-                                    incomeItem.add(
-                                        Income(
-                                            name = nameState.value,
-                                            description = descriptionState.value,
-                                            amount = amountState.value.toDouble(),
-                                            categoryID = categories
-                                        )
+                                    val dao = AppDatabase.getDatabase(context).appDao()
+                                    val income = Income(
+                                        name = nameState.value,
+                                        description = descriptionState.value,
+                                        amount = amountState.value.toDouble(),
+                                        categoryID = categories
                                     )
-                                    //name = "Name1", description = "Description1", amount = 150.0, categoryID = 1
+                                    runBlocking {dao.insertIncome(income)}
                                     showDialog.value = false
                                     setNumber++
                                     categories++
                                     onDialogueConfirmButtonClicked()
-
-                                    /*TODO: Storage to database*/
                                 }
                             ) {
                                 Text("Confirm")
@@ -230,28 +179,18 @@ fun AddCategories(
                         }
                     }
                 }
-//            Button(
-//                modifier = Modifier
-//                    .weight(1f)
-//                    .fillMaxHeight(),
-//                onClick = {
-//                    onConfirmButtonClicked()
-//                }
-//            ) {
-//                Text("Confirm")
-//            }
             }
         }
     }
 }
 
-@Composable
-@Preview
-fun AddScreenPreview()
-{
-    AddCategories(
-        modifier = Modifier,
-        //databaseObject = Unit,
-        showDialog = remember { mutableStateOf(false) }
-    )
-}
+//@Composable
+//@Preview
+//fun AddScreenPreview()
+//{
+//    AddCategories(
+//        modifier = Modifier,
+//        //databaseObject = Unit,
+//        showDialog = remember { mutableStateOf(false) }
+//    )
+//}

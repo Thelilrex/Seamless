@@ -1,5 +1,6 @@
 package com.example.seamless
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,7 +29,7 @@ enum class SeamlessScreen {
 }
 
 @Composable
-fun SeamlessApp(
+fun SeamlessApp(context : Context
 ){
     val navController = rememberNavController()
 
@@ -76,41 +77,32 @@ fun SeamlessApp(
 
         composable(route = SeamlessScreen.PersonalIncome.name){
             PersonalIncomesScreen(
-                dataToList = {/*TODO: Define function to take in DAO and return list of all personal Income items*/},
                 incomeToList = {/*TODO: Get the IncomeItems, them check if it is empty, if it is empty, use expenseToList */},
-                expenseToList = {/*TODO: Get the ExpenseItems*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Income*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Personal Income*/},
                 onAddButtonClicked = {navController.navigate(SeamlessScreen.PersonalAdd.name)},
-                databaseObject = { /* TODO: Database Object Passed Here */},
             )
         }
 
         composable(route = SeamlessScreen.PersonalExpenses.name){
             PersonalSpendsScreen(
-                dataToList = {/*TODO: Define function to take in DAO and return list of all personal expense items*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Expenses*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Personal Expenses*/},
-                //databaseObject = { /* TODO: Database Object Passed Here */},
                 showDialog = remember { mutableStateOf(false) }
             )
         }
 
         composable(route = SeamlessScreen.BusinessIncome.name){
             PersonalIncomesScreen(
-                dataToList = {/*TODO: Define function to take in DAO and return list of all business income items*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Business Income*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Business Income*/},
-                databaseObject = { /* TODO: Database Object Passed Here */},
             )
         }
 
         composable(route = SeamlessScreen.BusinessExpenses.name){
             PersonalSpendsScreen(
-                dataToList = {/*TODO: Define function to take in DAO and return list of all business expense items*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Business Expense*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Business Expense*/},
-                //databaseObject = { /* TODO: Database Object Passed Here */},
                 showDialog = remember { mutableStateOf(false) }
             )
         }
@@ -125,8 +117,8 @@ fun SeamlessApp(
                 onCancelButtonClicked = {
                     navigateUp(navController)
                 },
-                //databaseObject = { /* TODO: Database Object Passed Here */}
-                showDialog = remember { mutableStateOf(false) }
+                showDialog = remember { mutableStateOf(false)},
+                context = context
             )
         }
 
@@ -139,8 +131,8 @@ fun SeamlessApp(
                 onCancelButtonClicked = {
                     navigateUp(navController)
                 },
-                //databaseObject = { /* TODO: Database Object Passed Here */}
-                showDialog = remember { mutableStateOf(false) }
+                showDialog = remember { mutableStateOf(false) },
+                context = context
             )
         }
     }

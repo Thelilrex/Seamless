@@ -47,32 +47,13 @@ import com.example.seamless.database.Income
 
 @Composable
 fun PersonalIncomesScreen(
-    dataToList: () -> Unit = {},
     onDeleteButtonClicked: () -> Unit = {},
     onDialogueConfirmButtonClicked: () -> Unit = {},
     onAddButtonClicked:() -> Unit = {},
-    databaseObject: Any,
     incomeToList: () -> Unit = {},
-    expenseToList: () -> Unit = {},
-    // Dialog for delete, take ID.
-    // add the navigation for the personal / Business SpendsScreen
-    // navigate add+ button to the dialog,
-    // and then navigate add button to add-screen
-    // change the background of the dialog
-    // the buttons or drop down menu
-    // lock text field until they select one categories button (food.etc)
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
-    val browseItem = remember { mutableListOf<BrowseItem>(
-//        BrowseItem(1, "Foods", "Cat1", "Burgers", 500.0),
-//        BrowseItem(2, "Entertainments", "Cat2", "Games", 114.0),
-//        BrowseItem(3, "Transfers", "Cat3", "George", 810.0),
-//        BrowseItem(4, "Transport", "Cat4", "Taxi", 1919.0),
-//        BrowseItem(5, "Cloth", "Cat5", "Shirts", 514.0),
-//        BrowseItem(6, "Rent", "Cat6", "House", 2.0),
-    ) }
-    val incomeItem = remember { mutableListOf<Income>()}
-    val expenseItem = remember { mutableListOf<Expenses>()}
+    val incomeItem = remember { mutableListOf<Income>()} // Takes income
 
     val income: Income = Income(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
 
@@ -89,11 +70,6 @@ fun PersonalIncomesScreen(
     var setNumber by remember { mutableStateOf(1) }
     var categories by remember { mutableStateOf(1) }
 
-    val pieChartData = listOf(
-        incomeValue1.value.toFloatOrNull() ?: 0f,
-        incomeValue2.value.toFloatOrNull() ?: 0f,
-        incomeValue3.value.toFloatOrNull() ?: 0f
-    )
     val pieChartColors = listOf(
         Color(0xFFE91E63),
         Color(0xFF9C27B0),
@@ -278,14 +254,12 @@ fun BrowseItemsLayout(income: List<Income>) {
         }
     }
 }
-data class BrowseItem(val setNumber: Int, val name: String, val categories: String,
-                      val description: String, val amount: Double)
 
-@Composable
-@Preview(backgroundColor = 0xFFFFFFFF)
-fun PersonalIncomesScreenPreview()
-{
-    PersonalIncomesScreen(
-        databaseObject = {}
-    )
-}
+//@Composable
+//@Preview(backgroundColor = 0xFFFFFFFF)
+//fun PersonalIncomesScreenPreview()
+//{
+//    PersonalIncomesScreen(
+//        databaseObject = {}
+//    )
+//}

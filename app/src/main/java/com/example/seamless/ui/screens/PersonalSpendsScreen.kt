@@ -50,18 +50,14 @@ import kotlin.math.exp
 @Composable
 fun PersonalSpendsScreen(
     showDialog: MutableState<Boolean>,
-    dataToList: () -> Unit = {},
     onDeleteButtonClicked: () -> Unit = {},
     onDialogueConfirmButtonClicked: () -> Unit = {},
     onAddButtonClicked:() -> Unit = {},
-    //databaseObject: Any,
     expenseToList: () -> Unit = {}, // do this 2nd // do the screen(add)
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
-    val browseItem = remember { mutableListOf<BrowseItem>(
-    ) }
 
-    val expenseItem = remember { mutableListOf<Expenses>()}
+    val expenseItem = remember { mutableListOf<Expenses>()} // Takes Expenses
 
     val expenses: Expenses = Expenses(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
 
