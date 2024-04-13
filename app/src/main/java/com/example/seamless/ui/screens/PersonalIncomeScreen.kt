@@ -54,29 +54,26 @@ fun PersonalIncomesScreen(
     databaseObject: Any,
     incomeToList: () -> Unit = {},
     expenseToList: () -> Unit = {},
-    // Dialog for delete, take ID.
     // add the navigation for the personal / Business SpendsScreen
-    // navigate add+ button to the dialog,
     // and then navigate add button to add-screen
-    // change the background of the dialog
     // the buttons or drop down menu
-    // lock text field until they select one categories button (food.etc)
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
-    val browseItem = remember { mutableListOf<BrowseItem>(
-//        BrowseItem(1, "Foods", "Cat1", "Burgers", 500.0),
-//        BrowseItem(2, "Entertainments", "Cat2", "Games", 114.0),
-//        BrowseItem(3, "Transfers", "Cat3", "George", 810.0),
-//        BrowseItem(4, "Transport", "Cat4", "Taxi", 1919.0),
-//        BrowseItem(5, "Cloth", "Cat5", "Shirts", 514.0),
-//        BrowseItem(6, "Rent", "Cat6", "House", 2.0),
-    ) }
+//    val browseItem = remember { mutableListOf<BrowseItem>(
+////        BrowseItem(1, "Foods", "Cat1", "Burgers", 500.0),
+////        BrowseItem(2, "Entertainments", "Cat2", "Games", 114.0),
+////        BrowseItem(3, "Transfers", "Cat3", "George", 810.0),
+////        BrowseItem(4, "Transport", "Cat4", "Taxi", 1919.0),
+////        BrowseItem(5, "Cloth", "Cat5", "Shirts", 514.0),
+////        BrowseItem(6, "Rent", "Cat6", "House", 2.0),
+//    ) }
     val incomeItem = remember { mutableListOf<Income>()}
     val expenseItem = remember { mutableListOf<Expenses>()}
 
     val income: Income = Income(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
 
-    val showDialog = remember { mutableStateOf(false) }
+    val showDeleteDialog = remember { mutableStateOf(false) }
+
     val buttonDouble1 = remember { mutableStateOf(0.0) }
 
     val incomeType1 = remember { mutableStateOf("") }
@@ -157,13 +154,44 @@ fun PersonalIncomesScreen(
                     Spacer(modifier = Modifier.width(8.dp))
                     Button(
                         onClick = {
-                            showDialog.value = true
+                            showDeleteDialog.value = true
                         },
                         modifier = Modifier
                             .weight(1f)
                             .height(70.dp)
                     ) {
                         Text("Delete")
+                    }
+                }
+            }
+        }
+        if (showDeleteDialog.value) {
+            Dialog(onDismissRequest = { showDeleteDialog.value = false }) {
+                Column(modifier = Modifier
+                    .padding(16.dp)
+                    .background(Color.White)) {
+                    val IdState = remember { mutableStateOf("") }
+                    Text(text = "Enter an ID：")
+                    OutlinedTextField(
+                        value = IdState.value,
+                        onValueChange = { IdState.value = it},
+                        label = { Text("ID") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(10.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Button(
+                            onClick = {
+                                showDeleteDialog.value = false
+                            }
+                        ) {
+                            Text("Cofirm")
+                        }
                     }
                 }
             }
@@ -277,9 +305,10 @@ fun BrowseItemsLayout(income: List<Income>) {
             }
         }
     }
+
 }
-data class BrowseItem(val setNumber: Int, val name: String, val categories: String,
-                      val description: String, val amount: Double)
+//data class BrowseItem(val setNumber: Int, val name: String, val categories: String,
+//                      val description: String, val amount: Double)
 
 @Composable
 @Preview(backgroundColor = 0xFFFFFFFF)
