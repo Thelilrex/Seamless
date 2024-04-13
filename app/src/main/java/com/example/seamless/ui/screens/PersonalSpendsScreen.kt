@@ -226,7 +226,7 @@ fun PersonalSpendLegend(expenses: List<Expenses>, colors: List<Color>, modifier:
 fun SpendItemsLayout(expenses: List<Expenses>) {
     Column {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(10.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
