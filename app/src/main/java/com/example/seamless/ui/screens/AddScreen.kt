@@ -63,40 +63,40 @@ fun AddCategories(
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "1"
-                    showDialog.value = true
+                    showAddDialog.value = true
                 }) {
                 Text("Food")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "2"
-                    showDialog.value = true
+                    showAddDialog.value = true
                 }) {
                 Text("Entertainments")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "3"
-                    showDialog.value = true
+                    showAddDialog.value = true
                 }) {
                 Text("Rent")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "4"
-                    showDialog.value = true
+                    showAddDialog.value = true
                 }) {
                 Text("Transport")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "5"
-                    showDialog.value = true
+                    showAddDialog.value = true
                 }) {
                 Text("Cloth")
             }
             Button(modifier = Modifier.height(50.dp),
-                onClick = { showDialog.value = true }) {
+                onClick = { showAddDialog.value = true }) {
                 Text("Add+")
             }
         }
@@ -113,7 +113,7 @@ fun AddCategories(
                 onClick = {
                     onCancelButtonClicked()
                 }
-            ) {
+            ){
                 Text("Cancel")
             }
             if (showAddDialog.value) {
