@@ -233,7 +233,7 @@ fun PersonalIncomeLegend(income: List<Income>, colors: List<Color>, modifier: Mo
 fun BrowseItemsLayout(income: List<Income>) {
     Column {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(10.dp),
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
