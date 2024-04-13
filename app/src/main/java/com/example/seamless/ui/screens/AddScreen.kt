@@ -29,12 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.seamless.database.Income
 
-//@Composable
-//fun ParentScreen() {
-//    val showDialog = remember { mutableStateOf(false) }
-//    PersonalSpendsScreen(showDialog = showDialog)
-//    AddCategories(Modifier, showDialog = showDialog)
-//}
 
 @Composable
 fun AddCategories(
@@ -45,7 +39,7 @@ fun AddCategories(
     onDialogueConfirmButtonClicked: () -> Unit = {},
     //databaseObject: Any
 ) {
-    val showDialog = remember { mutableStateOf(false) }
+    val showAddDialog = remember { mutableStateOf(false) }
     val name = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
     val amount = remember { mutableStateOf("") }
@@ -161,8 +155,8 @@ fun AddCategories(
             ) {
                 Text("Cancel")
             }
-            if (showDialog.value) {
-                Dialog(onDismissRequest = { showDialog.value = false }) {
+            if (showAddDialog.value) {
+                Dialog(onDismissRequest = { showAddDialog.value = false }) {
                     Column(modifier = Modifier.padding(16.dp).background(Color.White)) {
                         val nameState = remember { mutableStateOf("") }
                         val amountState = remember { mutableStateOf("") }
@@ -213,7 +207,7 @@ fun AddCategories(
                                         )
                                     )
                                     //name = "Name1", description = "Description1", amount = 150.0, categoryID = 1
-                                    showDialog.value = false
+                                    showAddDialog.value = false
                                     setNumber++
                                     categories++
                                     onDialogueConfirmButtonClicked()

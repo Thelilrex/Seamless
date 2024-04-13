@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.seamless.ui.screens.AddCategories
+import com.example.seamless.ui.screens.AddExpenseCategories
 import com.example.seamless.ui.screens.BusinessScreen
 import com.example.seamless.ui.screens.PersonalIncomesScreen
 import com.example.seamless.ui.screens.PersonalScreen
@@ -21,6 +22,7 @@ enum class SeamlessScreen {
     Business,
     BusinessAdd,
     PersonalAdd,
+    PersonalExpenseAdd,
     BusinessIncome,
     BusinessExpenses,
     PersonalIncome,
@@ -91,8 +93,8 @@ fun SeamlessApp(
                 dataToList = {/*TODO: Define function to take in DAO and return list of all personal expense items*/},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Expenses*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Personal Expenses*/},
+                onAddExpenseButtonClicked = {navController.navigate(SeamlessScreen.PersonalExpenseAdd.name)},
                 //databaseObject = { /* TODO: Database Object Passed Here */},
-                showDialog = remember { mutableStateOf(false) }
             )
         }
 
@@ -111,7 +113,6 @@ fun SeamlessApp(
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Business Expense*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Business Expense*/},
                 //databaseObject = { /* TODO: Database Object Passed Here */},
-                showDialog = remember { mutableStateOf(false) }
             )
         }
 
@@ -135,6 +136,20 @@ fun SeamlessApp(
                 modifier = Modifier,
                 onConfirmButtonClicked = {
                     /* TODO: Implement Add Business Income/Expense*/
+                },
+                onCancelButtonClicked = {
+                    navigateUp(navController)
+                },
+                //databaseObject = { /* TODO: Database Object Passed Here */}
+                showDialog = remember { mutableStateOf(false) }
+            )
+        }
+
+        composable(route = SeamlessScreen.PersonalExpenseAdd.name){
+            AddExpenseCategories(
+                modifier = Modifier,
+                onConfirmButtonClicked = {
+                    /* TODO: Implement Add Personal Expense*/
                 },
                 onCancelButtonClicked = {
                     navigateUp(navController)

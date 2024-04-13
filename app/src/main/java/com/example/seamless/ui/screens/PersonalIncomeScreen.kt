@@ -56,7 +56,6 @@ fun PersonalIncomesScreen(
     expenseToList: () -> Unit = {},
     // add the navigation for the personal / Business SpendsScreen
     // and then navigate add button to add-screen
-    // the buttons or drop down menu
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
 //    val browseItem = remember { mutableListOf<BrowseItem>(
