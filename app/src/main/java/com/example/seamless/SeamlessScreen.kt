@@ -186,11 +186,13 @@ private fun incomeFlowToList(context: Context, typeID: Int): List<Income>
     val dao = AppDatabase.getDatabase(context).appDao()
     val flowIncome: Flow<List<Income>>
     runBlocking {flowIncome = dao.getIncomeByType(typeID)}
-    return runBlocking {
-        flowIncome
-            .flatMapConcat { it.asFlow() }
-            .toList()
+    val resultList = mutableListOf<Income>()
+    runBlocking {
+        flowIncome.collect { list ->
+            resultList.addAll(list)
+        }
     }
+    return resultList
 }
 
 private fun expenseFlowToList(context: Context, typeID: Int): List<Expenses>
@@ -198,9 +200,11 @@ private fun expenseFlowToList(context: Context, typeID: Int): List<Expenses>
     val dao = AppDatabase.getDatabase(context).appDao()
     val flowExpense: Flow<List<Expenses>>
     runBlocking {flowExpense = dao.getExpensesByType(typeID)}
-    return runBlocking {
-        flowExpense
-            .flatMapConcat { it.asFlow() }
-            .toList()
+    val resultList = mutableListOf<Expenses>()
+    runBlocking {
+        flowExpense.collect { list ->
+            resultList.addAll(list)
+        }
     }
+    return resultList
 }
