@@ -44,8 +44,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.example.seamless.database.AppDatabase
 import com.example.seamless.database.Expenses
 import com.example.seamless.database.Income
+import kotlinx.coroutines.runBlocking
 import kotlin.math.exp
 
 @Composable
@@ -60,7 +62,7 @@ fun PersonalSpendsScreen(
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
 
     val showDeleteDialog = remember { mutableStateOf(false) }
-
+    val IdState = remember { mutableStateOf("") }
 
     val pieChartColors = listOf(
         Color(0xFFE91E63),
@@ -123,7 +125,7 @@ fun PersonalSpendsScreen(
                     Spacer(modifier = Modifier.width(8.dp))
                     Button(
                         onClick = {
-                            onDeleteButtonClicked()
+                            showDeleteDialog.value = true
                         },
                         modifier = Modifier
                             .weight(1f)
@@ -142,7 +144,7 @@ fun PersonalSpendsScreen(
                     .padding(16.dp)
                     .background(Color.White)
             ) {
-                val IdState = remember { mutableStateOf("") }
+
                 Text(text = "Enter an ID：")
                 OutlinedTextField(
                     value = IdState.value,
@@ -159,6 +161,8 @@ fun PersonalSpendsScreen(
                 ) {
                     Button(
                         onClick = {
+                            val dao = AppDatabase.getDatabase(context).appDao()
+                            runBlocking { dao.deleteExpenseById(IdState.value.toInt())}
                             showDeleteDialog.value = false
                         }
                     ) {
