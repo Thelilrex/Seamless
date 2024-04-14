@@ -35,7 +35,7 @@ import com.example.seamless.database.Income
 import kotlinx.coroutines.runBlocking
 
 @Composable
-fun ParentComponent() {
+fun ParentIncomeComponent() {
     val incomeItem = remember { mutableStateListOf<Income>() }
 
     AddCategories(

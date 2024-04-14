@@ -43,7 +43,8 @@ enum class SeamlessScreen {
 fun SeamlessApp(context: Context
 ){
     val navController = rememberNavController()
-    val incomeItem = remember { mutableStateListOf<Income>() }
+    val incomeItem = remember { mutableStateListOf<Income>()}
+    val expenseItem = remember { mutableStateListOf<Expenses>()}
 
     NavHost(navController = navController, startDestination = SeamlessScreen.Start.name) {
         composable(route = SeamlessScreen.Start.name) {
@@ -104,6 +105,7 @@ fun SeamlessApp(context: Context
                 onDeleteButtonClicked = {/*TODO: Delete from Personal Expenses*/},
                 onAddExpenseButtonClicked = {navController.navigate(SeamlessScreen.PersonalExpenseAdd.name)},
                 context = context,
+                expenseItem = expenseItem,
                 expenseToList = {expenseFlowToList(context, currentScreen)}
             )
         }
@@ -122,7 +124,7 @@ fun SeamlessApp(context: Context
             PersonalSpendsScreen(
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Business Expense*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Business Expense*/},
-
+                expenseItem = expenseItem,
                 context = context,
                 expenseToList = {expenseFlowToList(context, currentScreen)}
             )
@@ -169,6 +171,7 @@ fun SeamlessApp(context: Context
                     navController.navigate(SeamlessScreen.PersonalExpenses.name)
                 },
                 showDialog = remember { mutableStateOf(false) },
+                expenseItem = expenseItem,
                 context = context
             )
         }

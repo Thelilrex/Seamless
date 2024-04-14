@@ -54,11 +54,11 @@ fun PersonalSpendsScreen(
     onDialogueConfirmButtonClicked: () -> Unit = {},
     onAddExpenseButtonClicked:() -> Unit = {},
     expenseToList: () -> Unit = {}, // do this 2nd // do the screen(add)
+    expenseItem: MutableList<Expenses>,
     context: Context
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
 
-    val expenseItem = remember { mutableListOf<Expenses>() }
     val showDeleteDialog = remember { mutableStateOf(false) }
 
 

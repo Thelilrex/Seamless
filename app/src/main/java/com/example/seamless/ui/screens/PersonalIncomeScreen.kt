@@ -55,7 +55,7 @@ fun PersonalIncomesScreen(
     incomeItem: MutableList<Income>,
     context: Context,
 ) {
-    val incomeItem = remember { mutableListOf<Income>()}
+    //val incomeItem = remember { mutableListOf<Income>()}
     val income: Income = Income(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
 
     val showDeleteDialog = remember { mutableStateOf(false) }
