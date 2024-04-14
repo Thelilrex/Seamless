@@ -59,6 +59,7 @@ fun PersonalIncomesScreen(
     //val incomeItem = remember { mutableListOf<Income>()}
     val income: Income = Income(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
     val showDeleteDialog = remember { mutableStateOf(false) }
+    val idState = remember { mutableStateOf("") }
     val pieChartColors = listOf(
         Color(0xFFE91E63),
         Color(0xFF9C27B0),
