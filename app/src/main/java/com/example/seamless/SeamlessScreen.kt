@@ -2,6 +2,7 @@ package com.example.seamless
 
 import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -42,6 +43,7 @@ enum class SeamlessScreen {
 fun SeamlessApp(context: Context
 ){
     val navController = rememberNavController()
+    val incomeItem = remember { mutableStateListOf<Income>() }
 
     NavHost(navController = navController, startDestination = SeamlessScreen.Start.name) {
         composable(route = SeamlessScreen.Start.name) {
@@ -91,7 +93,8 @@ fun SeamlessApp(context: Context
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Income*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Personal Income*/},
                 onAddButtonClicked = {navController.navigate(SeamlessScreen.PersonalAdd.name)},
-                context = context
+                context = context,
+                incomeItem = incomeItem
                 )
         }
 
@@ -110,6 +113,7 @@ fun SeamlessApp(context: Context
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Business Income*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Business Income*/},
                 context = context,
+                incomeItem = incomeItem,
                 incomeToList = {incomeFlowToList(context, currentScreen)}
                 )
         }
@@ -118,6 +122,7 @@ fun SeamlessApp(context: Context
             PersonalSpendsScreen(
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Business Expense*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Business Expense*/},
+
                 context = context,
                 expenseToList = {expenseFlowToList(context, currentScreen)}
             )
@@ -131,10 +136,11 @@ fun SeamlessApp(context: Context
                     /* TODO: Implement Add Business Income/Expense*/
                 },
                 onCancelButtonClicked = {
-                    navigateUp(navController)
+                    navController.navigate(SeamlessScreen.PersonalIncome.name)
                 },
                 showDialog = remember { mutableStateOf(false) },
-                context = context
+                context = context,
+                incomeItem = incomeItem
             )
         }
 
@@ -148,7 +154,8 @@ fun SeamlessApp(context: Context
                     navController.navigate(SeamlessScreen.PersonalIncome.name)
                 },
                 showDialog = remember { mutableStateOf(false) },
-                context = context
+                context = context,
+                incomeItem = incomeItem
             )
         }
 

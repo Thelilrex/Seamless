@@ -57,16 +57,10 @@ fun PersonalSpendsScreen(
     context: Context
 ) {
     /*TODO: Call dataToList to turn database object into list then set browseItem*/
-//    val browseItem = remember { mutableListOf<BrowseItem>() }
 
     val expenseItem = remember { mutableListOf<Expenses>() }
     val showDeleteDialog = remember { mutableStateOf(false) }
 
-    val expenses: Expenses =
-        Expenses(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
-
-    var setNumber by remember { mutableStateOf(1) }
-    var categories by remember { mutableStateOf(1) }
 
     val pieChartColors = listOf(
         Color(0xFFE91E63),
@@ -232,7 +226,7 @@ fun PersonalSpendLegend(expenses: List<Expenses>, colors: List<Color>, modifier:
 fun SpendItemsLayout(expenses: List<Expenses>) {
     Column {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(10.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(

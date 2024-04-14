@@ -49,7 +49,6 @@ class MainActivity : ComponentActivity() {
                 ) {
                     SeamlessApp(applicationContext)
                     //val dao = AppDatabase.getDatabase(applicationContext).appDao()
-
                 }
             }
         }
@@ -143,6 +142,7 @@ fun FunctionCard(function: Function, modifier: Modifier = Modifier)
         }
     }
 }
+
 
 //@Composable
 //@Preview

@@ -19,11 +19,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,13 +34,29 @@ import com.example.seamless.database.AppDatabase
 import com.example.seamless.database.Income
 import kotlinx.coroutines.runBlocking
 
+@Composable
+fun ParentComponent() {
+    val incomeItem = remember { mutableStateListOf<Income>() }
 
+    AddCategories(
+        modifier = Modifier,
+        showDialog = remember { mutableStateOf(false) },
+        incomeItem = incomeItem,
+        context = LocalContext.current
+    )
+
+    PersonalIncomesScreen(
+        incomeItem = incomeItem,
+        context = LocalContext.current
+    )
+}
 @Composable
 fun AddCategories(
     modifier: Modifier,
     showDialog: MutableState<Boolean>,
     onConfirmButtonClicked: () -> Unit = {},
     onCancelButtonClicked: () -> Unit = {},
+    incomeItem: MutableList<Income>,
     onDialogueConfirmButtonClicked: () -> Unit = {},
     context: Context
 ) {
@@ -51,6 +69,8 @@ fun AddCategories(
     var setNumber by remember { mutableStateOf(1) }
     var categories by remember { mutableStateOf(1) }
 
+
+
     Column(modifier = Modifier.padding(defaultPadding)) {
         Row(
             modifier = Modifier
@@ -59,42 +79,40 @@ fun AddCategories(
                 .height(50.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "1"
                     showAddDialog.value = true
                 }) {
-                Text("Food")
+                Text("Part Time")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "2"
                     showAddDialog.value = true
                 }) {
-                Text("Entertainments")
+                Text("Job")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "3"
                     showAddDialog.value = true
                 }) {
-                Text("Rent")
+                Text("Parents")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "4"
                     showAddDialog.value = true
                 }) {
-                Text("Transport")
+                Text("Bonus")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = {
                     id.value = "5"
                     showAddDialog.value = true
                 }) {
-                runBlocking {  }
-                Text("Cloth")
+                Text("Gifts")
             }
             Button(modifier = Modifier.height(50.dp),
                 onClick = { showAddDialog.value = true }) {
@@ -158,7 +176,7 @@ fun AddCategories(
                         ) {
                             Button(
                                 onClick = {
-                                    val income = Income(
+                                    val income = Income( // let the user to input the data to income, and then put the income to a list of Income.
                                         name = nameState.value,
                                         description = descriptionState.value,
                                         amount = amountState.value.toDouble(),
@@ -170,6 +188,8 @@ fun AddCategories(
                                     setNumber++
                                     categories++
                                     onDialogueConfirmButtonClicked()
+
+                                    incomeItem += income
                                 }
                             ) {
                                 Text("Confirm")

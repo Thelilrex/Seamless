@@ -53,32 +53,12 @@ fun PersonalIncomesScreen(
     onDialogueConfirmButtonClicked: () -> Unit = {},
     onAddButtonClicked:() -> Unit = {},
     incomeToList: () -> Unit = {},
-    context: Context
+    incomeItem: MutableList<Income>,
+    context: Context,
 ) {
     val incomeItem = remember { mutableListOf<Income>()}
-
     val income: Income = Income(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
-
     val showDeleteDialog = remember { mutableStateOf(false) }
-
-    val buttonDouble1 = remember { mutableStateOf(0.0) }
-
-    val incomeType1 = remember { mutableStateOf("") }
-    val incomeType2 = remember { mutableStateOf("") }
-    val incomeType3 = remember { mutableStateOf("") }
-    val incomeValue1 = remember { mutableStateOf("") }
-    val incomeValue2 = remember { mutableStateOf("") }
-    val incomeValue3 = remember { mutableStateOf("") }
-
-    var setNumber by remember { mutableStateOf(1) }
-    var categories by remember { mutableStateOf(1) }
-    val idState = remember { mutableStateOf("") }
-
-    val pieChartData = listOf(
-        incomeValue1.value.toFloatOrNull() ?: 0f,
-        incomeValue2.value.toFloatOrNull() ?: 0f,
-        incomeValue3.value.toFloatOrNull() ?: 0f
-    )
     val pieChartColors = listOf(
         Color(0xFFE91E63),
         Color(0xFF9C27B0),
@@ -98,7 +78,6 @@ fun PersonalIncomesScreen(
         Color(0xFF9E9E9E),
         Color(0xFF607D8B)
     )
-    val incomeTypes = listOf(incomeType1.value, incomeType2.value, incomeType3.value)
 
     Column(modifier = Modifier.fillMaxHeight()) {
 
@@ -129,9 +108,7 @@ fun PersonalIncomesScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Button(
-                        onClick = {onAddButtonClicked()}, // Shows the dialog
-//                            onAddButtonClicked()
-
+                        onClick = {onAddButtonClicked()},
                         modifier = Modifier
                             .weight(1f)
                             .height(70.dp)
@@ -187,7 +164,6 @@ fun PersonalIncomesScreen(
     }
 }
 
-
 @Composable
 fun PersonalIncomesPieChart(
     income: List<Income>,
@@ -221,10 +197,8 @@ fun PersonalIncomesPieChart(
 
 @Composable
 fun PersonalIncomeLegend(income: List<Income>, colors: List<Color>, modifier: Modifier = Modifier) {
-//    fun PersonalIncomeLegend(browseItems: List<BrowseItem>, colors: List<Color>, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         income.forEachIndexed { index, item ->
-//            browseItems.forEachIndexed { index, item ->
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier = Modifier
@@ -245,7 +219,7 @@ fun PersonalIncomeLegend(income: List<Income>, colors: List<Color>, modifier: Mo
 fun BrowseItemsLayout(income: List<Income>) {
     Column {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(10.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
@@ -292,7 +266,6 @@ fun BrowseItemsLayout(income: List<Income>) {
             }
         }
     }
-
 }
 
 //@Composable
