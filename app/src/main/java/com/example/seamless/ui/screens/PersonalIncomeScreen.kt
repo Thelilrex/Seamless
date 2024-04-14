@@ -43,7 +43,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.example.seamless.database.AppDatabase
 import com.example.seamless.database.Income
+import kotlinx.coroutines.runBlocking
 
 @Composable
 fun PersonalIncomesScreen(
@@ -56,9 +58,7 @@ fun PersonalIncomesScreen(
 ) {
     val incomeItem = remember { mutableListOf<Income>()}
     val income: Income = Income(name = "Name1", description = "Description1", amount = 150.0, categoryID = 1)
-
     val showDeleteDialog = remember { mutableStateOf(false) }
-
     val pieChartColors = listOf(
         Color(0xFFE91E63),
         Color(0xFF9C27B0),
@@ -134,11 +134,10 @@ fun PersonalIncomesScreen(
                 Column(modifier = Modifier
                     .padding(16.dp)
                     .background(Color.White)) {
-                    val IdState = remember { mutableStateOf("") }
                     Text(text = "Enter an ID：")
                     OutlinedTextField(
-                        value = IdState.value,
-                        onValueChange = { IdState.value = it},
+                        value = idState.value,
+                        onValueChange = { idState.value = it},
                         label = { Text("ID") },
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -151,6 +150,8 @@ fun PersonalIncomesScreen(
                     ) {
                         Button(
                             onClick = {
+                                val dao = AppDatabase.getDatabase(context).appDao()
+                                runBlocking { dao.deleteIncomeById(idState.value.toInt())}
                                 showDeleteDialog.value = false
                             }
                         ) {

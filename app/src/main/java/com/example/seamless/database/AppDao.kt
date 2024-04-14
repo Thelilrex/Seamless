@@ -19,7 +19,9 @@ interface AppDao{
     @Transaction
     @Query("Select * From Category Order By categoryID")
     fun getAllCategory(): Flow<List<Category>> // We might use it but mostly no
-
+    @Transaction
+    @Query("Select category From Category Where categoryID=:iD")
+    fun getCategoryById(iD: Int): String
     @Transaction
     @Query("Select * From Income Order By date Desc")
     fun getAllIncome(): Flow<List<Income>> // Most used stuff

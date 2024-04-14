@@ -180,7 +180,7 @@ fun AddCategories(
                                         name = nameState.value,
                                         description = descriptionState.value,
                                         amount = amountState.value.toDouble(),
-                                        categoryID = categories
+                                        categoryID = 1
                                     )
                                     val dao = AppDatabase.getDatabase(context).appDao()
                                     runBlocking { dao.insertIncome(income) }

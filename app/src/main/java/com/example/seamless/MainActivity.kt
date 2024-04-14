@@ -48,8 +48,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     SeamlessApp(applicationContext)
-                    val dao = AppDatabase.getDatabase(applicationContext).appDao()
-                    // As of now we need to pass this dao to implement the databases
+                    //val dao = AppDatabase.getDatabase(applicationContext).appDao()
                 }
             }
         }
