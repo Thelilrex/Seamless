@@ -49,6 +49,7 @@ import kotlinx.coroutines.runBlocking
 
 @Composable
 fun PersonalIncomesScreen(
+    onHomeButtonClicked: () -> Unit = {},
     onDeleteButtonClicked: () -> Unit = {},
     onDialogueConfirmButtonClicked: () -> Unit = {},
     onAddButtonClicked:() -> Unit = {},
@@ -81,7 +82,7 @@ fun PersonalIncomesScreen(
     )
 
     Column(modifier = Modifier.fillMaxHeight()) {
-
+        HomeButton(onHomeButtonClicked)
         Column {
             Column(modifier = Modifier.weight(0.8f)) {
                 Row(modifier = Modifier.padding(16.dp)) {

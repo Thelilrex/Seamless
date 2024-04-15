@@ -90,6 +90,8 @@ fun SeamlessApp(context: Context
 
         composable(route = SeamlessScreen.PersonalIncome.name){
             PersonalIncomesScreen(
+                onHomeButtonClicked = { goHome(navController = navController)
+                currentScreen = 1},
                 incomeToList = {incomeFlowToList(context, currentScreen)},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Income*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Personal Income*/},
@@ -101,6 +103,8 @@ fun SeamlessApp(context: Context
 
         composable(route = SeamlessScreen.PersonalExpenses.name){
             PersonalSpendsScreen(
+                onHomeButtonClicked = { goHome(navController = navController)
+                currentScreen = 1},
                 onDialogueConfirmButtonClicked = {/*TODO: Add to Personal Expenses*/},
                 onDeleteButtonClicked = {/*TODO: Delete from Personal Expenses*/},
                 onAddExpenseButtonClicked = {navController.navigate(SeamlessScreen.PersonalExpenseAdd.name)},
