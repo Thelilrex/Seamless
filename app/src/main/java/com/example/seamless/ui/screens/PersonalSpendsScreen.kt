@@ -52,6 +52,7 @@ import kotlin.math.exp
 
 @Composable
 fun PersonalSpendsScreen(
+    onHomeButtonClicked: () -> Unit = {},
     onDeleteButtonClicked: () -> Unit = {},
     onDialogueConfirmButtonClicked: () -> Unit = {},
     onAddExpenseButtonClicked:() -> Unit = {},
@@ -85,7 +86,7 @@ fun PersonalSpendsScreen(
     )
 
     Column(modifier = Modifier.fillMaxHeight()) {
-
+        BusinessHomeButton(onHomeButtonClicked)
         Column {
             Column(modifier = Modifier.weight(0.8f)) {
                 Row(modifier = Modifier.padding(16.dp)) {
